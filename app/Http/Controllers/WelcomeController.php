@@ -30,6 +30,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+        //github commit test
 		return view('welcome');
 	}
 
