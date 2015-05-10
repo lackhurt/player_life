@@ -40,8 +40,7 @@ class CaptchaController extends Controller {
         $phrase = $builder->getPhrase();
         Crypt::setKey('我的加密');
         $phrase_new = Crypt::encrypt($phrase);
-        Session::put('test', $phrase);
-        Session::put('mytest', 111111111111111);
+        Session::put('__captcha', $phrase);
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
