@@ -19,6 +19,10 @@ Route::get('corps', 'Corps\CorpsController@index');
 
 Route::get('corps/list', 'Corps\CorpsController@corps_list');
 
+Route::get('capt', 'Auth\CaptchaController@index');
+
+
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

@@ -28,25 +28,23 @@ class CaptchaController extends Controller {
     }
 
     /**
-     * Show the application welcome screen to the user.
-     *
-     * @return Response
+     * generate the captcha image
+     * type jpeg
+     * @return Captcha image
      */
-    public function index()
+    public function getIndex()
     {
-        //github commit test bb bb tghjkhghjkghk
+        //github commit
         $builder = new CaptchaBuilder();
         $builder->build();
         $phrase = $builder->getPhrase();
         Crypt::setKey('我的加密');
         $phrase_new = Crypt::encrypt($phrase);
-//        file_put_contents('/var/www/html/player_life.log', $phrase_new);
-        Session::put('test', $phrase_new);
+        Session::put('__captcha', $phrase);
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
         die;
-        //return view('welcome');
     }
 
 }
