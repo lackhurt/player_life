@@ -32,19 +32,16 @@ class CaptchaController extends Controller {
      * type jpeg
      * @return Captcha image
      */
-    public function getIndex()
+    public function index()
     {
         //github commit
         $builder = new CaptchaBuilder();
         $builder->build();
         $phrase = $builder->getPhrase();
-        Crypt::setKey('我的加密');
-        $phrase_new = Crypt::encrypt($phrase);
         Session::put('__captcha', $phrase);
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
-        die;
     }
 
 }

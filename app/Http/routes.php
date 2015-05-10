@@ -18,8 +18,8 @@ Route::get('home', 'HomeController@index');
 Route::get('corps', 'Corps\CorpsController@index');
 
 Route::get('corps/list', 'Corps\CorpsController@corps_list');
+Route::get('captcha', 'Auth\CaptchaController@index');
 
-Route::get('capt', 'Auth\CaptchaController@index');
 
 
 
