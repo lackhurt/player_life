@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">短信激活码</label>
                     <div class="col-md-6">
-                        <input type="email" class="form-control" name="phone_identifying_code" value="">
+                        <input type="text" class="form-control" name="phone_identifying_code" value="">
                     </div>
                 </div>
 
