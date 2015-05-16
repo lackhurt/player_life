@@ -15,7 +15,6 @@ class Registrar implements RegistrarContract {
 	 */
 	public function validator(array $data)
 	{
-
         $rules = [
             "phone" => ['required','unique:users', 'numeric', 'regex: /^(\+86)?((13[0-9])|(15[0-9])|(17[08])|(18[0-9]))\d{8}$/'],
             "password" => 'required|confirmed',
@@ -29,9 +28,9 @@ class Registrar implements RegistrarContract {
             'password.required' => '请输入密码',
             'password_confirmation.required' => '请确认密码',
             'phone.regex' => '手机号格式不正确',
-            'captcha_code.require' => '请输入验证码',
-            'phone_identifying_code.require' => '请输入短信激活码',
-            'password.confirmed' => '两次输入密码不一致',
+            'captcha_code.required' => '请输入验证码',
+            'phone_identifying_code.required' => '请输入短信激活码',
+            'confirmed' => '两次输入密码不一致',
             'captcha_code.in' => '验证码无效',
 
         ];
