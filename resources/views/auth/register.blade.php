@@ -6,7 +6,6 @@
 		<div class="col-md-8 col-md-offset-2">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -21,14 +20,14 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">手机号</label>
                     <div class="col-md-6">
-                        <input placeholder="用于登陆和找回密码" type="text" class="form-control" name="name" value="{{ old('name') }}">
+                        <input placeholder="用于登陆和找回密码" type="text" class="form-control" name="phone" value="{{ old('name') }}">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label">短信激活码</label>
                     <div class="col-md-6">
-                        <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                        <input type="email" class="form-control" name="phone_identifying_code" value="{{ old('email') }}">
                     </div>
                 </div>
 
@@ -52,7 +51,7 @@
                         <img src="/captcha" alt=""/>
                     </div>
                     <div class="col-md-3">
-                        <input type="password" class="form-control" name="password_confirmation">
+                        <input type="password" class="form-control" name="captcha_code">
                     </div>
                 </div>
                 <div class="form-group">
