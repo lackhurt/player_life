@@ -51,7 +51,7 @@
                         <img src="/captcha" alt=""/>
                     </div>
                     <div class="col-md-3">
-                        <input type="password" class="form-control" name="captcha_code">
+                        <input type="text" class="form-control" name="captcha_code">
                     </div>
                 </div>
                 <div class="form-group">
