@@ -26,8 +26,7 @@ return [
 	|
 	*/
 
-	'default' => 'mysql',
-
+    'default' => 'mongodb',
 	/*
 	|--------------------------------------------------------------------------
 	| Database Connections
@@ -51,6 +50,18 @@ return [
 			'database' => storage_path().'/database.sqlite',
 			'prefix'   => '',
 		],
+
+        'mongodb' => array(
+            'driver'   => 'mongodb',
+            'host'     => 'localhost',
+            'port'     => 27017,
+            'username' => '',
+            'password' => '',
+            'database' => 'player_life',
+            'options' => array(
+                'db' => 'admin' // sets the authentication database required by mongo 3
+            )
+        ),
 
 		'mysql' => [
 			'driver'    => 'mysql',
