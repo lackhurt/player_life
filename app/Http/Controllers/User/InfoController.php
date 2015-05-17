@@ -9,17 +9,42 @@
 
 namespace App\Http\Controllers\User;
 
-
+use App\Services\Users\UserInfo;
+use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class InfoController extends Controller
 {
+    public $userInfo;
+
+
+
+    public function __construct(UserInfo $userInfo)
+    {
+        $this->userInfo = $userInfo;
+    }
+
 
     //基础信息
     public function getBase() {
 
+        return view('user.base');
+    }
 
-        return '这是基础信息页面';
+    //基础信息表单参数接收
+    public function postBase(Request $request) {
+        $validator = $this->userInfo->validatorBase($request->all());
+
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+
     }
 
     //头像
