@@ -24,14 +24,14 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">ID</label>
                     <div class="col-md-6">
-                        <label class="col-md-6 control-label">111111111</label>
+                        <label class="col-md-6 control-label">{{$user->id}}</label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label">昵称</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="nickname" value="">
+                        <input type="text" class="form-control" name="nickname" value="{{$user->nickname}}">
                     </div>
                 </div>
 
@@ -39,11 +39,11 @@
                     <label class="col-md-4 control-label">性别</label>
                     <div class="col-md-6 checkbox-inline">
                         <label>
-                            <input type="radio" name="gender" id="optionsRadios3" value="m" checked>
+                            <input type="radio" name="gender" id="optionsRadios3" value="m">
                             男
                         </label>
                         <label>
-                            <input type="radio" name="gender" id="optionsRadios3" value="f" >
+                            <input type="radio" name="gender" id="optionsRadios3" value="f" @if (isset($user->gender) && $user->gender == 'f') @else checked @endif>
                             女
                         </label>
                     </div>
@@ -53,11 +53,11 @@
                     <label class="col-md-4 control-label">生日</label>
                     <div class="col-md-6">
                         <div class="input-group date form_date col-md-8" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                            <input class="form-control"  type="text" name="birthday" value="" readonly>
+                            <input class="form-control"  type="text" name="birthday" value="{{date('Y-m-d', $user->birthday)}}" readonly>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                        <input class="col-md-4" type="hidden" id="dtp_input2" value="" /><br/>
+                        <input class="col-md-4" type="hidden" id="dtp_input2" value="{{date('Y-m-d', $user->birthday)}}" /><br/>
                     </div>
                 </div>
 
@@ -65,11 +65,11 @@
                     <label class="col-md-4 control-label">出生地</label>
 
                         <div class="col-md-3">
-                            <select class="form-control" name="homeplace_province">
+                            <select value="4" class="form-control" name="homeplace_province">
                                 <option value="北京">北京</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                                 <option>5</option>
                             </select>
                         </div>

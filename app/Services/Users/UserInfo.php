@@ -16,22 +16,22 @@ class UserInfo {
 
     public function validatorBase(array $data) {
         $rules = [
-            "phone" => ['required','unique:users', 'numeric', 'regex: /^(\+86)?((13[0-9])|(15[0-9])|(17[08])|(18[0-9]))\d{8}$/'],
-            "password" => 'required|confirmed',
-            "password_confirmation" => 'required',
-            "captcha_code" => 'required|in:'.Session::get('__captcha'),
-            "phone_identifying_code" => 'required',
+//            "phone" => ['required', 'numeric', 'regex: /^(\+86)?((13[0-9])|(15[0-9])|(17[08])|(18[0-9]))\d{8}$/'],
+//            "password" => 'required|confirmed',
+//            "password_confirmation" => 'required',
+//            "captcha_code" => 'required|in:'.Session::get('__captcha'),
+//            "phone_identifying_code" => 'required',
         ];
 
         $messages = [
-            'phone.required' => '请输入手机号',
-            'password.required' => '请输入密码',
-            'password_confirmation.required' => '请确认密码',
-            'phone.regex' => '手机号格式不正确',
-            'captcha_code.required' => '请输入验证码',
-            'phone_identifying_code.required' => '请输入短信激活码',
-            'confirmed' => '两次输入密码不一致',
-            'captcha_code.in' => '验证码无效',
+//            'phone.required' => '请输入手机号',
+//            'password.required' => '请输入密码',
+//            'password_confirmation.required' => '请确认密码',
+//            'phone.regex' => '手机号格式不正确',
+//            'captcha_code.required' => '请输入验证码',
+//            'phone_identifying_code.required' => '请输入短信激活码',
+//            'confirmed' => '两次输入密码不一致',
+//            'captcha_code.in' => '验证码无效',
 
         ];
         return Validator::make($data, $rules, $messages);
@@ -52,6 +52,21 @@ class UserInfo {
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    //用户信息编辑
+    public function update(array $data) {
+        $user = User::find('555879699c21e8de7c8b4568');
+        $user->update([
+            'birthday' => strtotime($data['birthday']),
+            'nickname' => $data['nickname'],
+            'gender' => $data['gender'],
+            'homeplace_province' => $data['homeplace_province'],
+            'homeplace_city' => $data['homeplace_city'],
+            'location_province' => $data['location_province'],
+            'location_city' => $data['location_city'],
+        ], array());
+
     }
 
 
