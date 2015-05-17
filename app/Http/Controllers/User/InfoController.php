@@ -12,7 +12,9 @@ namespace App\Http\Controllers\User;
 use App\Services\Users\UserInfo;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class InfoController extends Controller
 {
@@ -27,16 +29,17 @@ class InfoController extends Controller
 
 
     //基础信息
-    public function getBase() {
+    public function getBase(Guard $guard) {
 
-        $user = User::find('55587f2f988388c9038b4567');
+
+        $user = User::find(Session::get($guard->getName()));
         return view('user.base')->with(array(
                 'user' => $user
             ));
     }
 
     //基础信息表单参数接收
-    public function postBase(Request $request) {
+    public function postBase(Request $request, Guard $guard) {
         $validator = $this->userInfo->validatorBase($request->all());
 
 
@@ -47,7 +50,7 @@ class InfoController extends Controller
             );
         }
 //        var_dump($this->userInfo);die;
-        $this->userInfo->update($request->all());
+        $this->userInfo->update($request->all(), Session::get($guard->getName()));
 
         return redirect('/');
 
