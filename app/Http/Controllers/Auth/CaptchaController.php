@@ -37,11 +37,12 @@ class CaptchaController extends Controller {
         $builder = new CaptchaBuilder();
         $builder->build();
         $phrase = $builder->getPhrase();
+        file_put_contents('phrase.log', $phrase);
         Session::put('__captcha', $phrase);
+        file_put_contents('getphrase.log', Session::get('__captcha'));
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
-        die;
     }
 
 }

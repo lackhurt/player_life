@@ -21,10 +21,18 @@ Route::get('corps/list', 'Corps\CorpsController@corps_list');
 Route::get('captcha', 'Auth\CaptchaController@index');
 
 
-
-
 Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-	'test' => 'TestController',
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
 ]);
+
+//用户信息
+Route::group(['prefix' => 'user'], function(){
+    Route::controllers([
+        'info' => 'User\InfoController',
+    ]);
+});
+
+
+
+
