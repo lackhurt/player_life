@@ -39,11 +39,11 @@
                     <label class="col-md-4 control-label">性别</label>
                     <div class="col-md-6 checkbox-inline">
                         <label>
-                            <input type="radio" name="gender" id="optionsRadios3" value="option3" checked>
+                            <input type="radio" name="gender" id="optionsRadios3" value="m" checked>
                             男
                         </label>
                         <label>
-                            <input type="radio" name="gender" id="optionsRadios3" value="option3" >
+                            <input type="radio" name="gender" id="optionsRadios3" value="f" >
                             女
                         </label>
                     </div>
