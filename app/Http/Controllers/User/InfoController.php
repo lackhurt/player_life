@@ -29,7 +29,10 @@ class InfoController extends Controller
     //基础信息
     public function getBase() {
 
-        return view('user.base');
+        $user = User::find('55587f2f988388c9038b4567');
+        return view('user.base')->with(array(
+                'user' => $user
+            ));
     }
 
     //基础信息表单参数接收
@@ -43,6 +46,10 @@ class InfoController extends Controller
                 $request, $validator
             );
         }
+//        var_dump($this->userInfo);die;
+        $this->userInfo->update($request->all());
+
+        return redirect('/');
 
 
     }
@@ -77,4 +84,6 @@ class InfoController extends Controller
     public function Resume() {
 
     }
+
+
 }
