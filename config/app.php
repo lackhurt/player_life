@@ -145,6 +145,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
         'Jenssegers\Mongodb\MongodbServiceProvider',
+        'App\lib\Uploader\UploaderServiceProvider',
 
 	],
 
@@ -193,6 +194,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'Uploader'  => 'App\lib\Uploader\UploaderServiceProvider',
 
 	],
 

@@ -3,7 +3,11 @@
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Services\Users\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
+use App\lib\Uploader\Uploader;
 
 class CorpsController extends Controller {
 
@@ -24,8 +28,10 @@ class CorpsController extends Controller {
         return view('corps/list');
     }
 
-    public function corps_list()
+    public function corps_list(Request $request)
     {
+//        Uploader::test($request->all()['file']);
+        Storage::disk('local')->put('tmp/file.txt', 'Contents');
         return view('corps/list');
     }
 }

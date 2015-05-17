@@ -26,4 +26,5 @@ Route::get('captcha', 'Auth\CaptchaController@index');
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
+	'test' => 'TestController',
 ]);
