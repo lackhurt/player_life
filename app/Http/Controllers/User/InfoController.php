@@ -29,7 +29,7 @@ class InfoController extends Controller
     //基础信息
     public function getBase() {
 
-        $user = User::find('555879699c21e8de7c8b4568');
+        $user = User::find('55587f2f988388c9038b4567');
         return view('user.base')->with(array(
                 'user' => $user
             ));

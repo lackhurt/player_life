@@ -56,7 +56,7 @@ class UserInfo {
 
     //用户信息编辑
     public function update(array $data) {
-        $user = User::find('555879699c21e8de7c8b4568');
+        $user = User::find('55587f2f988388c9038b4567');
         $user->update([
             'birthday' => strtotime($data['birthday']),
             'nickname' => $data['nickname'],
