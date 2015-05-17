@@ -1,6 +1,10 @@
 @extends('app')
 
 @section('content')
+    <link rel="stylesheet" href="/style/lib/bootstrap/bootstrap-datetimepicker.min.css"/>
+    <script src="/js/lib/bootstrap/bootstrap-datetimepicker.min.js"></script>
+    <script src="/js/lib/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -18,46 +22,94 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label">手机号32322</label>
+                    <label class="col-md-4 control-label">ID</label>
                     <div class="col-md-6">
-                        <input placeholder="用于登陆和找回密码" type="text" class="form-control" name="phone" value="{{ old('name') }}">
+                        <label class="col-md-6 control-label">111111111</label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label">短信激活码</label>
+                    <label class="col-md-4 control-label">昵称</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="phone_identifying_code" value="">
+                        <input type="text" class="form-control" name="nickname" value="">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label">密码</label>
-                    <div class="col-md-6">
-                        <input type="password" class="form-control" name="password">
+                    <label class="col-md-4 control-label">性别</label>
+                    <div class="col-md-6 checkbox-inline">
+                        <label>
+                            <input type="radio" name="gender" id="optionsRadios3" value="option3" checked>
+                            男
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" id="optionsRadios3" value="option3" >
+                            女
+                        </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label">重新输入密码</label>
+                    <label class="col-md-4 control-label">生日</label>
                     <div class="col-md-6">
-                        <input type="password" class="form-control" name="password_confirmation">
+                        <div class="input-group date form_date col-md-8" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            <input class="form-control"  type="text" name="birthday" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <input class="col-md-4" type="hidden" id="dtp_input2" value="" /><br/>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-4 control-label">验证码</label>
+                    <label class="col-md-4 control-label">出生地</label>
+
+                        <div class="col-md-3">
+                            <select class="form-control" name="homeplace_province">
+                                <option value="北京">北京</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" name="homeplace_city">
+                                <option value="北京">北京</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">所在地</label>
+
                     <div class="col-md-3">
-                        <img src="/captcha" alt=""/>
+                        <select class="form-control" name="location_province">
+                            <option value="北京">北京</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" name="captcha_code">
+                        <select class="form-control" name="location_city">
+                            <option value="北京">北京</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-6 col-md-offset-4">
                         <button type="submit" class="btn btn-primary">
-                            注册
+                            　提交　
                         </button>
                     </div>
                 </div>
@@ -65,4 +117,16 @@
         </div>
     </div>
 </div>
+    <script>
+        $('.form_date').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
 @endsection
