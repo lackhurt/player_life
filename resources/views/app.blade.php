@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <div class="page-header">
-        <h1>LOGO HERE <small> title </small></h1>
+        <h1>LOGO HERE <small> {{$title}} </small></h1>
     </div>
     <div>
         @yield('content')
