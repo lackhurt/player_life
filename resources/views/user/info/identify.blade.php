@@ -40,7 +40,7 @@
                         @if (isset($user->identify_card) && !empty($user->identify_card))
                         <label class="col-md-6 control-label">{{substr_replace($user->identify_card, '****', '17', '4')}}</label>
                         @else
-                        <input type="text" class="form-control" name="name" value="{{$user->identify_card}}">
+                        <input type="text" class="form-control" name="identify_card" value="{{$user->identify_card}}">
                         @endif
                     </div>
                 </div>

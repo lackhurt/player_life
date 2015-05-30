@@ -58,7 +58,7 @@ class InfoController extends Controller
 
     //头像
     public function getAvatar() {
-        return 22;
+        return view('user.info.avatar')->with('title', '头像');
     }
 
     //真实身份
