@@ -80,25 +80,19 @@
                         </div>
 
                 </div>
-                <div class="form-group">
+                <div class="form-group" ms-controller="locationAddress">
                     <label class="col-md-4 control-label">所在地</label>
 
                     <div class="col-md-3">
                         <select class="form-control" name="location_province">
-                            <option value="北京">北京</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option ms-repeat-el="province" ms-attr-value="el.id" >{% el.name %}</option>
+
                         </select>
                     </div>
                     <div class="col-md-3">
                         <select class="form-control" name="location_city">
-                            <option value="北京">北京</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option ms-repeat-el="city" ms-attr-value="el.id">{% el.name %}</option>
+
                         </select>
                     </div>
                 </div>
@@ -114,7 +108,14 @@
     </div>
 </div>
 <script>
+
+
+
     require(['app/user/info/base'], function() {
+
     });
+
+
+
 </script>
 @endsection

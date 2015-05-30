@@ -1,4 +1,7 @@
 define(['bootstrap.datetimepicker.cn'], function($) {
+
+
+
     $('.form_date').datetimepicker({
         language:  'zh-CN',
         weekStart: 1,
@@ -9,4 +12,26 @@ define(['bootstrap.datetimepicker.cn'], function($) {
         minView: 2,
         forceParse: 0
     });
+    window.locationAddress = avalon.define({
+        $id:'locationAddress',
+        province:[],
+        city:[],
+        proChange:function(id){
+            $.post('/common/district/list-by-parent-id',{parentId:id},function(response){
+                locationAddress.city = response;
+            },'json');
+        }
+    });
+
+    setTimeout(function() {
+        $.post('/common/district/list-by-parent-id',{parentId:0},function(response){
+            console.log('list-by-parent-id:%o',response);
+            locationAddress.province = response;
+        },'json');
+    }, 2000);
+
+
+
+
+
 });

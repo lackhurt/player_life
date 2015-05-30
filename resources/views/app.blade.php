@@ -7,9 +7,16 @@
     <title></title>
     <script src="/js/lib/requirejs/2.1.18/require.js"></script>
     <script src="/js/lib/jquery/2.1.3/jquery.js"></script>
+    <script src="/js/lib/avalon/1.44/avalon.js"></script>
     <script src="/js/config.js"></script>
     <script>
+        avalon.config({
+            debug: true,
+            loader: false,
+            interpolate: ["{%","%}"]
+        });
         require(['bootstrap']);
+
     </script>
 </head>
 <body>
