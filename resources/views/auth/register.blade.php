@@ -65,4 +65,7 @@
 		</div>
 	</div>
 </div>
+<script>
+    require(['app/auth/register']);
+</script>
 @endsection

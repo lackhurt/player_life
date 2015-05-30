@@ -1,0 +1,11 @@
+{
+  "name": "player-life-resources-build",
+  "description": "Build js/css of Player life",
+  "repository": {},
+  "readme": "Build js/css of Player life",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-requirejs": "~ 0.4.4"
+  }
+}

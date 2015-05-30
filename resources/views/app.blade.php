@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link rel="stylesheet" href="/style/lib/bootstrap/bootstrap.css"/>
-    <script src="/js/lib/jquery/jquery-2.1.3.js"></script>
-    <script src="/js/lib/bootstrap/bootstrap.js"></script>
+    <script src="/js/lib/requirejs/2.1.18/require.js"></script>
+    <script src="/js/lib/jquery/2.1.3/jquery.js"></script>
+    <script src="/js/config.js"></script>
 </head>
 <body>
 <div class="container">

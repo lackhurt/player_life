@@ -33,7 +33,7 @@ class InfoController extends Controller
 
 
         $user = User::find(Session::get($guard->getName()));
-        return view('user.base')->with(array(
+        return view('user.info.base')->with(array(
                 'user' => $user
             ));
     }
@@ -59,7 +59,7 @@ class InfoController extends Controller
 
     //头像
     public function getAvatar() {
-        return 22;
+        return view('user.info.avatar');
     }
 
     //真实身份

@@ -1,10 +1,6 @@
 @extends('app')
 
 @section('content')
-    <link rel="stylesheet" href="/style/lib/bootstrap/bootstrap-datetimepicker.min.css"/>
-    <script src="/js/lib/bootstrap/bootstrap-datetimepicker.min.js"></script>
-    <script src="/js/lib/bootstrap/bootstrap-datetimepicker.zh-CN.js"></script>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -117,16 +113,8 @@
         </div>
     </div>
 </div>
-    <script>
-        $('.form_date').datetimepicker({
-            language:  'zh-CN',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });
-    </script>
+<script>
+    require(['app/user/info/base'], function() {
+    });
+</script>
 @endsection
