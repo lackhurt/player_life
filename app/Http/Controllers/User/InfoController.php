@@ -14,6 +14,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class InfoController extends Controller
@@ -30,11 +31,10 @@ class InfoController extends Controller
 
     //基础信息
     public function getBase(Guard $guard) {
-
-
         $user = User::find(Session::get($guard->getName()));
-        return view('user.info.base')->with(array(
-                'user' => $user
+        return view('user.base')->with(array(
+                'user' => $user,
+                'title' =>  '基础信息',
             ));
     }
 
@@ -49,21 +49,41 @@ class InfoController extends Controller
                 $request, $validator
             );
         }
-//        var_dump($this->userInfo);die;
-        $this->userInfo->update($request->all(), Session::get($guard->getName()));
+        $this->userInfo->updateBase($request->all(), Session::get($guard->getName()));
 
-        return redirect('/');
+        return redirect('/user/info/identify');
 
 
     }
 
     //头像
     public function getAvatar() {
-        return view('user.info.avatar');
+        return 22;
     }
 
     //真实身份
-    public function getIdentify() {
+    public function getIdentify(Guard $guard) {
+        $user = User::find(Session::get($guard->getName()));
+        return view('user.identify')->with(array(
+            'user'  =>  $user,
+            'title' =>  '实名信息',
+        ));
+    }
+
+    //真实身份
+    public function postIdentify(Request $request, Guard $guard) {
+        $validator = $this->userInfo->validatorBase($request->all());
+
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+        $this->userInfo->updateIdentify($request->all(), Session::get($guard->getName()));
+
+        return redirect('/');
 
     }
 

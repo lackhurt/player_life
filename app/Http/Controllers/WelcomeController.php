@@ -31,7 +31,9 @@ class WelcomeController extends Controller {
 	public function index()
 	{
         //github commit test bb bb tghjkhghjkghk
-		return view('welcome');
+		return view('welcome')->with(array(
+            'title' => '欢迎'
+        ));
 	}
 
 }
