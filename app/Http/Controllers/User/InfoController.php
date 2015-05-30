@@ -32,7 +32,7 @@ class InfoController extends Controller
     //基础信息
     public function getBase(Guard $guard) {
         $user = User::find(Session::get($guard->getName()));
-        return view('user.base')->with(array(
+        return view('user.info.base')->with(array(
                 'user' => $user,
                 'title' =>  '基础信息',
             ));
@@ -64,7 +64,7 @@ class InfoController extends Controller
     //真实身份
     public function getIdentify(Guard $guard) {
         $user = User::find(Session::get($guard->getName()));
-        return view('user.identify')->with(array(
+        return view('user.info.identify')->with(array(
             'user'  =>  $user,
             'title' =>  '实名信息',
         ));
