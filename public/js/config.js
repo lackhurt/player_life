@@ -7,9 +7,9 @@ requirejs.config({
     },
     paths: {
         jquery: 'lib/jquery/2.1.3/jquery',
-        bootstrap: 'lib/bootstrap/bootstrap',
-        'bootstrap.datetimepicker': 'lib/bootstrap/datetimepicker/bootstrap-datetimepicker.min',
-        'bootstrap.datetimepicker.cn': 'lib/bootstrap/datetimepicker/bootstrap-datetimepicker.zh-CN'
+        bootstrap: 'lib/bootstrap/3.3.4/bootstrap',
+        'bootstrap.datetimepicker': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.min',
+        'bootstrap.datetimepicker.cn': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.zh-CN'
     },
     shim: {
         'bootstrap.datetimepicker': {
