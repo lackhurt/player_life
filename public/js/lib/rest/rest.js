@@ -13,7 +13,7 @@
             url: url,
             data: data,
             success: function(rs) {
-                if (rs.code === 'FFF') {
+                if (rs.code === 4095) {
                     if (typeof callback === 'function') {
                         callback.call(this, rs.msg, rs.data);
                     }

@@ -11,7 +11,7 @@ class RestProcessor
 {
     public function resolve($data, $msg = null) {
         $formattedData = [
-            'code' => 'FFF',
+            'code' => 4095,
             'data' => $data,
             'msg'  => $msg
         ];
