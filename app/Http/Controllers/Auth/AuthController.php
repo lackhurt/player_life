@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller {
 
@@ -34,4 +35,30 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;
 	}
 
+    public function getLogin()
+    {
+        return view('auth.login')->with(array('title'=>'登录页'));
+    }
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            "phone" => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('phone', 'password');
+//        var_dump($this->auth->attempt($credentials, $request->has('remember')));die;
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only('phone', 'remember'))
+            ->withErrors([
+                'phone' => $this->getFailedLoginMessage(),
+            ]);
+    }
 }
