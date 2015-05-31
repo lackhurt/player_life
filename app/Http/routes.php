@@ -33,6 +33,12 @@ Route::group(['prefix' => 'user'], function(){
         'info' => 'User\InfoController',
     ]);
 });
+//通用服务
+Route::group(['prefix' => 'common'], function(){
+    Route::controllers([
+        'district' => 'Common\DistrictController',
+    ]);
+});
 
 
 
