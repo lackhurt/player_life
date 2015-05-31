@@ -28,7 +28,10 @@ Route::controllers([
 ]);
 
 //用户信息
-Route::group(['prefix' => 'user'], function(){
+Route::group([
+    'middleware' => ['auth'],
+    'prefix' => 'user'
+], function(){
     Route::controllers([
         'info' => 'User\InfoController',
     ]);
