@@ -85,8 +85,8 @@ class UserInfo {
             'birthday' => strtotime($data['birthday']),
             'nickname' => $data['nickname'],
             'gender' => $data['gender'],
-            'homeplace_province' => $data['homeplace_province'],
-            'homeplace_city' => $data['homeplace_city'],
+            'birthplace_province' => $data['birthplace_province'],
+            'birthplace_city' => $data['birthplace_city'],
             'location_province' => $data['location_province'],
             'location_city' => $data['location_city'],
         ], array());

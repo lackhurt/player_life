@@ -36,7 +36,7 @@ define(['react'], function(React) {
                         <select className="form-control" name={this.props.name + '_city'}>
                             {
                                 this.state.city.map(function(city) {
-                                    return <option value="{city.id}">{city.name}</option>
+                                    return <option value={city.id}>{city.name}</option>
                                 })
                             }
                         </select>
