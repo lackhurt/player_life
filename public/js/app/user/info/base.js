@@ -1,6 +1,4 @@
-define(['bootstrap.datetimepicker.cn'], function($) {
-
-
+define(['bootstrap.datetimepicker.cn', 'react', 'jsx!app/common/district.jsx'], function($, React, District) {
 
     $('.form_date').datetimepicker({
         language:  'zh-CN',
@@ -12,26 +10,7 @@ define(['bootstrap.datetimepicker.cn'], function($) {
         minView: 2,
         forceParse: 0
     });
-    window.locationAddress = avalon.define({
-        $id:'locationAddress',
-        province:[],
-        city:[],
-        proChange:function(id){
-            $.post('/common/district/list-by-parent-id',{parentId:id},function(response){
-                locationAddress.city = response;
-            },'json');
-        }
-    });
 
-    setTimeout(function() {
-        $.post('/common/district/list-by-parent-id',{parentId:0},function(response){
-            console.log('list-by-parent-id:%o',response);
-            locationAddress.province = response;
-        },'json');
-    }, 2000);
-
-
-
-
-
+    District.renderTo('#bornDisctrict', 'birthplace');
+    District.renderTo('#location', 'location');
 });
