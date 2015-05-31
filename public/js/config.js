@@ -1,5 +1,6 @@
 requirejs.config({
     baseUrl: '/js/',
+    deps: ['rest'],
     map: {
         '*': {
             'css': '/js/lib/requirejs/plugins/require-css/0.1.8/css.js'
@@ -14,7 +15,8 @@ requirejs.config({
         'bootstrap.datetimepicker': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.min',
         'bootstrap.datetimepicker.cn': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.zh-CN',
         plupload: 'lib/plupload/2.1.4/plupload.full.min',
-        react: 'lib/react/0.13.3/react'
+        react: 'lib/react/0.13.3/react',
+        rest: 'lib/rest/rest'
     },
     shim: {
         'bootstrap.datetimepicker': {
@@ -41,6 +43,9 @@ requirejs.config({
         'react': {
             //deps: ['lib/react/0.13.3/JSXTransformer'],
             exports: 'React'
+        },
+        rest: {
+            exports: '$'
         }
     }
 });

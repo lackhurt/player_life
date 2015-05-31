@@ -8,13 +8,15 @@ define(['react'], function(React) {
             };
         },
         handleChange: function(event) {
-            $.post('/common/district/list-by-parent-id', {
+            var request = $.restGet('/common/district/list-by-parent-id', {
                 parentId: event.target.value
-            },function(response){
+            });
+            request.done(function(data) {
+
                 this.setState({
-                    city: response
+                    city: data
                 });
-            }.bind(this),'json');
+            }.bind(this));
         },
         render: function () {
             var value = this.state.value;
@@ -43,11 +45,15 @@ define(['react'], function(React) {
             );
         },
         componentDidMount: function() {
-            $.post('/common/district/list-by-parent-id',{parentId:0},function(response){
+            var request = $.restGet('/common/district/list-by-parent-id',{
+                parentId: 0
+            });
+
+            request.done(function(data){
                 this.setState({
-                    province: response
+                    province: data
                 });
-            }.bind(this),'json');
+            }.bind(this));
         }
     });
 
