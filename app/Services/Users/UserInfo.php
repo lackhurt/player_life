@@ -124,7 +124,7 @@ class UserInfo {
             'identify_card' => $data['identify_card'],
             'name' => $data['name'],
         ], array());
-C
+
     }
     //用户联系信息编辑
     public function updateContract(array $data, $id) {
@@ -132,7 +132,7 @@ C
         $user->update([
             'email' => $data['email'],
             'qq' => $data['qq'],
-            'wechat' => $data['wehat'],
+            'wechat' => $data['weChat'],
         ], array());
 
     }
