@@ -69,9 +69,11 @@ class UserInfo {
 //            "password_confirmation" => 'required',
 //            "captcha_code" => 'required|in:'.Session::get('__captcha'),
 //            "phone_identifying_code" => 'required',
+            "email" => ['required','email'],
         ];
 
         $messages = [
+
 //            'phone.required' => '请输入手机号',
 //            'password.required' => '请输入密码',
 //            'password_confirmation.required' => '请确认密码',
@@ -80,7 +82,8 @@ class UserInfo {
 //            'phone_identifying_code.required' => '请输入短信激活码',
 //            'confirmed' => '两次输入密码不一致',
 //            'captcha_code.in' => '验证码无效',
-
+            'email.required'=>'请输入邮箱',
+           'email.email'=>'邮箱格式不正确'
         ];
         return Validator::make($data, $rules, $messages);
 
@@ -132,7 +135,7 @@ class UserInfo {
         $user->update([
             'email' => $data['email'],
             'qq' => $data['qq'],
-            'wechat' => $data['weChat'],
+            'wechat' => $data['wechat'],
         ], array());
 
     }

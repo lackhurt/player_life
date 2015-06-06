@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">微信</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="weChat" value="{{$user->weChat}}">
+                        <input type="text" class="form-control" name="wechat" value="{{$user->wechat}}">
                     </div>
                 </div>
                 <div class="form-group">
