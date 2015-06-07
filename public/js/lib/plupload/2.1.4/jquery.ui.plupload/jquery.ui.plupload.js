@@ -113,7 +113,7 @@ _jQuery UI_ widget factory, there are some specifics. See examples below for mor
 		@param {Boolean} [settings.views.remember=true] Whether to remember the current view (requires jQuery Cookie plugin).
 	@param {Boolean} [settings.multiple_queues=true] Re-activate the widget after each upload procedure.
 */
-;(function(window, document, plupload, o, $) {
+;(function(window, document, plupload, moxie, $) {
 
 /**
 Dispatched when the widget is initialized and ready.
@@ -451,19 +451,19 @@ $.widget("ui.plupload", {
 				
 			switch (err.code) {
 				case plupload.FILE_EXTENSION_ERROR:
-					details = o.sprintf(_("File: %s"), err.file.name);
+					details = moxie.sprintf(_("File: %s"), err.file.name);
 					break;
 				
 				case plupload.FILE_SIZE_ERROR:
-					details = o.sprintf(_("File: %s, size: %d, max file size: %d"), err.file.name,  plupload.formatSize(err.file.size), plupload.formatSize(plupload.parseSize(up.getOption('filters').max_file_size)));
+					details = moxie.sprintf(_("File: %s, size: %d, max file size: %d"), err.file.name,  plupload.formatSize(err.file.size), plupload.formatSize(plupload.parseSize(up.getOption('filters').max_file_size)));
 					break;
 
 				case plupload.FILE_DUPLICATE_ERROR:
-					details = o.sprintf(_("%s already present in the queue."), err.file.name);
+					details = moxie.sprintf(_("%s already present in the queue."), err.file.name);
 					break;
 					
 				case self.FILE_COUNT_ERROR:
-					details = o.sprintf(_("Upload element accepts only %d file(s) at a time. Extra files were stripped."), up.getOption('filters').max_file_count || 0);
+					details = moxie.sprintf(_("Upload element accepts only %d file(s) at a time. Extra files were stripped."), up.getOption('filters').max_file_count || 0);
 					break;
 				
 				case plupload.IMAGE_FORMAT_ERROR :
@@ -488,7 +488,7 @@ $.widget("ui.plupload", {
 
 			self._trigger('error', null, { up: up, error: err } );
 
-			// do not show UI if no runtime can be initialized
+			// do not show UI if no runtime v be initialized
 			if (err.code === plupload.INIT_ERROR) {
 				setTimeout(function() {
 					self.destroy();
@@ -854,7 +854,7 @@ $.widget("ui.plupload", {
 				up.disableBrowse();
 			}
 							
-			$('.plupload_upload_status', this.element).html(o.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
+			$('.plupload_upload_status', this.element).html(moxie.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
 			$('.plupload_header_content', this.element).addClass('plupload_header_content_bw');
 		} 
 		else if (plupload.STOPPED === up.state) {
@@ -885,7 +885,7 @@ $.widget("ui.plupload", {
 		if (up.total.queued === 0) {
 			$('.ui-button-text', this.browse_button).html(_('Add Files'));
 		} else {
-			$('.ui-button-text', this.browse_button).html(o.sprintf(_('%d files queued'), up.total.queued));
+			$('.ui-button-text', this.browse_button).html(moxie.sprintf(_('%d files queued'), up.total.queued));
 		}
 
 		up.refresh();
@@ -968,7 +968,7 @@ $.widget("ui.plupload", {
 				.html(plupload.formatSize(up.total.size))
 				.end()
 			.find('.plupload_upload_status')
-				.html(o.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
+				.html(moxie.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
 	},
 
 
@@ -1048,7 +1048,7 @@ $.widget("ui.plupload", {
 
 
 		function preloadThumb(file, cb) {
-			var img = new o.Image();
+			var img = new moxie.Image();
 
 			img.onload = function() {
 				var thumb = $('#' + file.id + ' .plupload_file_thumb', self.filelist);
@@ -1057,8 +1057,8 @@ $.widget("ui.plupload", {
 					height: self.options.thumb_height, 
 					//crop: true,
 					resample: 'bicubic',
-					swf_url: o.resolveUrl(self.options.flash_swf_url),
-					xap_url: o.resolveUrl(self.options.silverlight_xap_url)
+					swf_url: moxie.resolveUrl(self.options.flash_swf_url),
+					xap_url: moxie.resolveUrl(self.options.silverlight_xap_url)
 				});
 			};
 
@@ -1131,7 +1131,7 @@ $.widget("ui.plupload", {
 		}
 
 		$.each(files, function(i, file) {
-			var ext = o.Mime.getFileExtension(file.name) || 'none';
+			var ext = moxie.Mime.getFileExtension(file.name) || 'none';
 
 			html += file_html.replace(/\{(\w+)\}/g, function($0, $1) {
 				switch ($1) {
@@ -1186,7 +1186,7 @@ $.widget("ui.plupload", {
 		} 
 	
 		// ugly fix for IE6 - make content area stretchable
-		if (o.Env.browser === 'IE' && o.Env.version < 7) {
+		if (moxie.Env.browser === 'IE' && moxie.Env.version < 7) {
 			this.content.attr('style', 'height:expression(document.getElementById("' + this.id + '_container' + '").clientHeight - ' + (view === 'list' ? 132 : 102) + ')');
 		}
 

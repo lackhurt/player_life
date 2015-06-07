@@ -9,6 +9,8 @@
 
 namespace App\Http\Controllers\User;
 
+use App\lib\Rest\Rest;
+use App\lib\Uploader\Uploader;
 use App\Services\Users\UserInfo;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -58,7 +60,20 @@ class InfoController extends Controller
 
     //头像
     public function getAvatar() {
-        return view('user.info.avatar')->with('title', '头像');
+        return view('user.info.avatar')->with([
+            'title' => '头像',
+            'upload_token' => Uploader::generateToken([
+                'size' => 1024 * 1024 * 5
+            ])
+        ]);
+    }
+
+    public function postUploadAvatar(Request $request) {
+        Uploader::valid($request->all()['upload_token'], $request->all()['file']);
+        $path = Uploader::confirm(Uploader::saveTemporary($request->all()['file']), 'user');
+        return Rest::resolve([
+            'path' => $path
+        ]);
     }
 
     //真实身份

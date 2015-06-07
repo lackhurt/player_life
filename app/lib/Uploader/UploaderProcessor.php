@@ -68,7 +68,7 @@ class UploaderProcessor
         if (isset($module) && !empty($module)) {
             $fullName = $this->getFileFullName($id, 'tmp');
             Storage::move('uploads/tmp/' . $fullName, 'uploads/' . $module . '/' . $fullName);
-            return 'uploads/' . $module . '/' . $fullName;
+            return '/uploads/' . $module . '/' . $fullName;
         }
     }
 

@@ -1,13 +1,13 @@
 requirejs.config({
     baseUrl: '/js/',
-    deps: ['rest'],
+    deps: ['rest', 'bootstrap'],
     map: {
         '*': {
-            'css': '/js/lib/requirejs/plugins/require-css/0.1.8/css.js'
+            css: '/js/lib/requirejs/plugins/require-css/0.1.8/css.js',
+            jsx: "lib/requirejs/plugins/require-jsx/jsx"
         }
     },
     paths: {
-        jsx: "lib/requirejs/plugins/require-jsx/jsx",
         JSXTransformer: 'lib/react/0.13.3/JSXTransformer',
         avalon: 'lib/avalon/1.44/avalon',
         jquery: 'lib/jquery/2.1.3/jquery',
