@@ -103,8 +103,27 @@ class InfoController extends Controller
     }
 
     //联系方式
-    public function getContract() {
+    public function getContract(Guard $guard) {
+        $user = User::find(Session::get($guard->getName()));
+        return view('user.info.contract')->with(array(
+            'user'  =>  $user,
+            'title' =>  '联系方式',
+        ));
+    }
 
+    public function postContract(Request $request, Guard $guard) {
+
+        $validator = $this->userInfo->validatorContract($request->all());
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+        $this->userInfo->updateContract($request->all(), Session::get($guard->getName()));
+
+        return redirect('/');
     }
 
     //游戏人生
