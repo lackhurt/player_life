@@ -61,4 +61,9 @@ class AuthController extends Controller {
                 'phone' => $this->getFailedLoginMessage(),
             ]);
     }
+
+    public function getRegister()
+    {
+        return view('auth.register')->with('title', '注册');
+    }
 }
