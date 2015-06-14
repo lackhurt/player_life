@@ -19,4 +19,6 @@
     <li role="presentation"><a href="#">骨灰大神</a></li>
     <li role="presentation"><a href="#">店长推荐</a></li>
 </ul>
+
+@include('menu')
 @endsection
