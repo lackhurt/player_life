@@ -6,7 +6,7 @@
  * Time: 下午1:52
  */
 
-namespace App\Services\Users;
+namespace App\Services\User;
 
 use App\User;
 use Illuminate\Support\Facades\Session;
@@ -140,7 +140,12 @@ class UserInfo {
 
     }
 
-
+    public function updateAvatar($avatar, $id) {
+        $user = User::find($id);
+        $user->update([
+            'avatar' => $avatar
+        ]);
+    }
 
 
 } 

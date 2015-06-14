@@ -11,7 +11,7 @@ namespace App\Http\Controllers\User;
 
 use App\lib\Rest\Rest;
 use App\lib\Uploader\Uploader;
-use App\Services\Users\UserInfo;
+use App\Services\User\UserInfo;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
@@ -59,18 +59,20 @@ class InfoController extends Controller
     }
 
     //头像
-    public function getAvatar() {
+    public function getAvatar(Guard $guard) {
         return view('user.info.avatar')->with([
             'title' => '头像',
             'upload_token' => Uploader::generateToken([
                 'size' => 1024 * 1024 * 5
-            ])
+            ]),
+            'user' => User::find(Session::get($guard->getName()))
         ]);
     }
 
-    public function postUploadAvatar(Request $request) {
+    public function postUploadAvatar(Request $request, Guard $guard) {
         Uploader::valid($request->all()['upload_token'], $request->all()['file']);
         $path = Uploader::confirm(Uploader::saveTemporary($request->all()['file']), 'user');
+        $this->userInfo->updateAvatar($path, Session::get($guard->getName()));
         return Rest::resolve([
             'path' => $path
         ]);

@@ -1,4 +1,4 @@
-<?php namespace App\Services\Modules\Users;
+<?php namespace App\Services\Modules\User;
 use Illuminate\Support\Facades\Validator;
 
 class Registrar {

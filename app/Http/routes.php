@@ -34,8 +34,20 @@ Route::group([
 ], function(){
     Route::controllers([
         'info' => 'User\InfoController',
+        'corps' => 'User\CorpsController',
     ]);
 });
+
+
+Route::group([
+    'prefix' => 'corp'
+], function(){
+    Route::controllers([
+        'create' => 'Corp\CreateController',
+    ]);
+});
+
+
 //通用服务
 Route::group(['prefix' => 'common'], function(){
     Route::controllers([

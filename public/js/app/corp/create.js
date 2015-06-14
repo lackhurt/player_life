@@ -1,6 +1,6 @@
 define(['plupload'], function(plupload) {
 
-    function processUploadAvatar(token) {
+    function processUploadBadge(token) {
         var uploader = new plupload.Uploader({
             runtimes : 'html5,flash,silverlight,html4',
             browse_button : 'pickfiles', // you can pass in id...
@@ -9,7 +9,7 @@ define(['plupload'], function(plupload) {
             multipart_params: {
                 upload_token: token
             },
-            url: "/user/info/upload-avatar",
+            url: "/corp/create/upload-badge",
 
             //flash_swf_url : 'http://rawgithub.com/moxiecode/moxie/master/bin/flash/Moxie.cdn.swf',
             //silverlight_xap_url : 'http://rawgithub.com/moxiecode/moxie/master/bin/silverlight/Moxie.cdn.xap',
@@ -26,6 +26,7 @@ define(['plupload'], function(plupload) {
                         $('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                     });
                     uploader.start();
+                    $('#badge').val('');
                 },
 
                 UploadProgress: function(up, file) {
@@ -39,7 +40,8 @@ define(['plupload'], function(plupload) {
                     var data = $.parseJSON(response.response);
 
                     if (data.code === 4095) {
-                        $('#avatar').attr('src', data.data.path);
+                        $('#badgePreview').attr('src', data.data.path);
+                        $('#badge').val(data.data.path);
                     }
                 }
             }
@@ -48,7 +50,8 @@ define(['plupload'], function(plupload) {
         uploader.init();
     }
 
+
     return {
-        processUploadAvatar: processUploadAvatar
+        processUploadBadge: processUploadBadge
     };
 });
