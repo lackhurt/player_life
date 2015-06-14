@@ -14,6 +14,5 @@
             </div>
         </div>
     </div>
-
     @include('menu')
 @endsection
