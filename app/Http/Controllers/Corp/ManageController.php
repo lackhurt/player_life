@@ -9,12 +9,14 @@
 namespace App\Http\Controllers\Corp;
 
 use App\Http\Controllers\Controller;
+use App\lib\Rest\Rest;
 use App\lib\Uploader\Uploader;
 use App\Services\Corp\Corp;
 use App\Services\Corp\CorpMembers;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PhpSpec\Exception\Exception;
 
 
 class ManageController extends Controller {
@@ -32,18 +34,38 @@ class ManageController extends Controller {
     }
 
     public function postUpdate(Request $request, Corp $corp) {
-        $corp->update($request->all(), $request->get('id'));
+
+        if ($corp->update($request->all(), $request->get('id'))) {
+            return redirect('/corp/info?id=' . $request->get('id'));
+        }
     }
 
-    public function postRemoveAdmin() {
+    public function postRemoveAdmin(Request $request, CorpMembers $corpMembers) {
+        try {
+            if ($corpMembers->removeAdmin($request->get('id'), $request->get('userId'))) {
+                return Rest::resolve([]);
+            } else {
+                return Rest::reject('移除管理员失败');
+            }
+        } catch(Exception $e) {
+            return Rest::reject($e->getMessage());
+        }
 
     }
 
     public function postRemoveMember(Request $request, CorpMembers $corpMembers) {
-        $corpMembers->removeAdmin($request->get('corpId'), $request->get('userId'));
+
     }
 
-    public function postAddAdmin() {
-
+    public function postAddAdmin(Request $request, CorpMembers $corpMembers) {
+        try {
+            if ($corpMembers->addAdmin($request->get('id'), $request->get('userId'))) {
+                return Rest::resolve([]);
+            } else {
+                return Rest::reject('添加管理员失败');
+            }
+        } catch(Exception $e) {
+            return Rest::reject($e->getMessage());
+        }
     }
 }

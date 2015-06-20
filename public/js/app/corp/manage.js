@@ -14,7 +14,7 @@ define([], function() {
 
     function removeAdmin(corpId, userId) {
         var request = $.restPost('/corp/manage/remove-admin', {
-            corpId: corpId,
+            id: corpId,
             userId: userId
         });
         request.done(function() {
@@ -27,7 +27,7 @@ define([], function() {
 
     function addAdmin(corpId, userId) {
         $.restPost('/corp/manage/add-admin', {
-            corpId: corpId,
+            id: corpId,
             userId: userId
         });
         request.done(function() {
@@ -37,7 +37,7 @@ define([], function() {
 
     function removeMember(corpId, userId) {
         $.restPost('/corp/manage/remove-member', {
-            corpId: corpId,
+            id: corpId,
             userId: userId
         });
         request.done(function() {
