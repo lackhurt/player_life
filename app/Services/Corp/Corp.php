@@ -36,8 +36,7 @@ class Corp {
     public function update(array $data, $id) {
         $corp = new \App\Corp();
         $corp->_id = $id;
-        $corp->update([
-            'nickname' => $data['nickname'],
+        return $corp->update([
             'badge' => $data['badge'],
             'description' => $data['description'],
             'sponsor' => $data['sponsor'],
