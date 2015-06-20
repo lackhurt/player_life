@@ -37,7 +37,7 @@ class CreateController extends Controller {
         ]);
     }
 
-    public function postIndex(Corp $corp, Request $request) {
+    public function postIndex(Corp $corp, Request $request, Guard $guard) {
         $validator = $corp->validatorCreateData($request->all());
 
 
@@ -47,9 +47,9 @@ class CreateController extends Controller {
                 $request, $validator
             );
         }
-        $corp->create($request->all(), Session::get($this->guard->getName()));
+        $corpModel = $corp->create($request->all(), Session::get($guard->getName()));
 
-        return redirect('/corp/create');
+        return redirect('/corp/manage?id=' . $corpModel['_id']);
     }
 
     public function postUploadBadge(Request $request) {

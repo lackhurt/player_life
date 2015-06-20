@@ -1,6 +1,9 @@
 <?php namespace App\Services\Corp;
 
+use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use PhpSpec\Exception\Exception;
 
 class Corp {
 
@@ -19,8 +22,60 @@ class Corp {
             'badge' => $data['badge'],
             'sponsor' => $data['sponsor'],
             'primary_game' => $data['primary_game'],
-            'creator' => $creatorId
+            'members' => [
+                [
+                    'user_id' => $creatorId,
+                    'is_creator' => true,
+                    'is_admin' => true,
+                    'joined_at' => new \MongoDate()
+                ]
+            ]
         ]);
+    }
+
+    public function update(array $data, $id) {
+        $corp = new \App\Corp();
+        $corp->_id = $id;
+        $corp->update([
+            'nickname' => $data['nickname'],
+            'badge' => $data['badge'],
+            'description' => $data['description'],
+            'sponsor' => $data['sponsor'],
+        ]);
+    }
+
+
+    public function getCorpInfo($id) {
+        $corpModel = \App\Corp::find($id);
+
+        if (empty($corpModel)) {
+            throw new Exception('未找到id为' . $id . '的战队');
+        }
+
+        $memberIdArr = [];
+
+        $members = $corpModel['members'];
+
+        array_walk($members, function($member) use(&$memberIdArr) {
+            $memberIdArr[] = new \MongoId($member['user_id']);
+        });
+
+
+        $users = User::find($memberIdArr);
+
+        $this->convertMember($members, $users);
+
+        $corpModel['members'] = $members;
+
+        return $corpModel;
+    }
+
+    private function convertMember(&$members, $users) {
+        array_walk($members, function(&$member, $index) use ($users) {
+            $member['avatar'] = $users->get($index)->avatar;
+            $member['gender'] = $users->get($index)->gender;
+            $member['nickname'] = $users->get($index)->nickname;
+        });
     }
 
     public function validatorCreateData(array $data) {

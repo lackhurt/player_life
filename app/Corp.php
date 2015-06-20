@@ -25,7 +25,7 @@ class Corp extends Eloquent {
         'badge',
         'sponsor',
         'primary_game',
-        'creator',
+        'members',
     ];
 
 	/**

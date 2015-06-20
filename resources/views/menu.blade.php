@@ -3,6 +3,22 @@
     <tbody>
     <tr>
         <th>
+            登陆
+        </th>
+        <td>
+            <a href="/auth/login">/auth/login</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            注册
+        </th>
+        <td>
+            <a href="/auth/register">/auth/register</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
             用户信息-基础信息
         </th>
         <td>
@@ -28,6 +44,14 @@
     <tr>
         <th>
             用户信息-联系方式
+        </th>
+        <td>
+            <a href="/user/info/contract">/user/info/contract</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            战队-创建
         </th>
         <td>
             <a href="/user/info/contract">/user/info/contract</a>

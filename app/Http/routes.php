@@ -44,6 +44,8 @@ Route::group([
 ], function(){
     Route::controllers([
         'create' => 'Corp\CreateController',
+        'info' => 'Corp\InfoController',
+        'manage' => 'Corp\ManageController',
     ]);
 });
 

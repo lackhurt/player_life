@@ -67,8 +67,8 @@
         </div>
     </div>
     <script>
-        require(['app/corp/create'], function(create) {
-            create.processUploadBadge('{{$upload_token}}');
+        require(['app/corp/badge'], function(badge) {
+            badge.processUploadBadge('{{$upload_token}}');
         });
     </script>
 @endsection
