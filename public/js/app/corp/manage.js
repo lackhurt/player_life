@@ -13,7 +13,10 @@ define([], function() {
 
 
     function removeAdmin(corpId, userId) {
-        var request = $.restPost('/corp/manage/remove-admin');
+        var request = $.restPost('/corp/manage/remove-admin', {
+            corpId: corpId,
+            userId: userId
+        });
         request.done(function() {
             locate.reload();
         });
@@ -23,14 +26,20 @@ define([], function() {
     }
 
     function addAdmin(corpId, userId) {
-        $.restPost('/corp/manage/add-admin');
+        $.restPost('/corp/manage/add-admin', {
+            corpId: corpId,
+            userId: userId
+        });
         request.done(function() {
             locate.reload();
         });
     }
 
     function removeMember(corpId, userId) {
-        $.restPost('/corp/manage/remove-member');
+        $.restPost('/corp/manage/remove-member', {
+            corpId: corpId,
+            userId: userId
+        });
         request.done(function() {
             locate.reload();
         });

@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Corp;
 use App\Http\Controllers\Controller;
 use App\lib\Uploader\Uploader;
 use App\Services\Corp\Corp;
+use App\Services\Corp\CorpMembers;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -38,8 +39,8 @@ class ManageController extends Controller {
 
     }
 
-    public function postRemoveMember() {
-
+    public function postRemoveMember(Request $request, CorpMembers $corpMembers) {
+        $corpMembers->removeAdmin($request->get('corpId'), $request->get('userId'));
     }
 
     public function postAddAdmin() {

@@ -12,10 +12,8 @@ class CorpMembers {
             'members' => [
                 '$in' => [
                     '$elemMatch' => [
-                        '$in' => [
                             'user_id' => $userId,
                             'is_admin' => true
-                        ]
                     ]
                 ]
             ],
@@ -26,9 +24,14 @@ class CorpMembers {
 
     public function removeAdmin($corpId, $userId) {
         DB::collection('corps')->update([
-
+            '_id' => new \MongoId($corpId)
         ], [
-
+            '$pull' => [
+                'members' => [
+                    'user_id' => $userId
+                ]
+            ]
         ]);
+
     }
 }
