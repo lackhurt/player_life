@@ -9,12 +9,6 @@
                     <input type="hidden" name="id" value="{{$corp['_id']}}"/>
                     <h2>基础信息</h2>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">队伍昵称</label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="nickname" value="{{$corp['nickname']}}">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-md-2 control-label">赞助商</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="sponsor" value="{{$corp['sponsor']}}">
@@ -72,11 +66,17 @@
                                             管理&nbsp;<span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">辞去管理员</a></li>
-                                            <li><a href="#">设置为管理员</a></li>
-                                            <li><a href="#">移除管理员权限</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">踢出</a></li>
+                                            @if (isset($member['is_admin']) && $member['is_admin'] == true)
+                                                @if ($user_id == $member['user_id'])
+                                                <li><a href="javascript:;" class="js_remove_admin" data-corp-id="{{$corp['_id']}}" data-member-id="{{$member['user_id']}}">辞去管理员</a></li>
+                                                @else
+                                                <li><a href="javascript:;" class="js_remove_admin" data-corp-id="{{$corp['_id']}}" data-member-id="{{$member['user_id']}}">移除管理员权限</a></li>
+                                                @endif
+                                            @else
+                                                <li><a href="javascript:;" class="js_add_admin" data-corp-id="{{$corp['_id']}}" data-member-id="{{$member['user_id']}}">设置为管理员</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="javascript:;" class="js_remove_member" data-corp-id="{{$corp['_id']}}" data-member-id="{{$member['user_id']}}">踢出</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
@@ -93,7 +93,7 @@
         </div>
     </div>
     <script>
-        require(['app/corp/badge'], function(badge) {
+        require(['app/corp/badge', 'app/corp/manage'], function(badge, manage) {
             badge.processUploadBadge('{{$upload_token}}');
         });
     </script>

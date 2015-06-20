@@ -43,8 +43,24 @@ Route::group([
     'prefix' => 'corp'
 ], function(){
     Route::controllers([
-        'create' => 'Corp\CreateController',
         'info' => 'Corp\InfoController',
+    ]);
+});
+
+Route::group([
+    'prefix' => 'corp',
+    'middleware' => ['auth'],
+], function(){
+    Route::controllers([
+        'create' => 'Corp\CreateController',
+    ]);
+});
+
+Route::group([
+    'prefix' => 'corp',
+    'middleware' => ['auth', 'corp.administrator']
+], function(){
+    Route::controllers([
         'manage' => 'Corp\ManageController',
     ]);
 });

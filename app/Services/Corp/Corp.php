@@ -44,7 +44,6 @@ class Corp {
         ]);
     }
 
-
     public function getCorpInfo($id) {
         $corpModel = \App\Corp::find($id);
 
