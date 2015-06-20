@@ -11,7 +11,6 @@
                         <h2>基础信息 <small>{{$corp->description}}</small></h2>
                         <div>
                             <img width="128" height="128" src="/images/badge_default.jpg" alt="" class="img-thumbnail"/>
-<!--                            <button class="btn btn-primary">修改头像</button>-->
                         </div>
                     </fieldset>
                     <fieldset>
@@ -63,9 +62,9 @@
                                     </td>
                                     <td>
                                         @if(!empty($member['tags']))
-                                        管理员大人
+                                        {{$member['tags']}}
                                         @else
-                                        小兵
+                                        无
                                         @endif
                                     </td>
 
@@ -75,7 +74,7 @@
                                 </tbody>
                             </table>
                             <p>
-                                <button class="center-block btn btn-lg btn-primary">投递简历</button>
+                                <button class="center-block btn btn-lg btn-primary @if($isBelongCorp) hidden @endif">投递简历</button>
                             </p>
                         </div>
                     </fieldset>
