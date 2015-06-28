@@ -59,6 +59,15 @@
     </tr>
     <tr>
         <th>
+            简历-管理
+        </th>
+        <td>
+            <a href="/user/resume/manage">/user/resume</a>
+            <a href="/corp/create">/corp/create</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
             用户-我建的战队
         </th>
         <td>
