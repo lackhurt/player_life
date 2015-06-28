@@ -35,6 +35,7 @@ Route::group([
     Route::controllers([
         'info' => 'User\InfoController',
         'corps' => 'User\CorpsController',
+        'resume' => 'User\ResumeController',
     ]);
 });
 
