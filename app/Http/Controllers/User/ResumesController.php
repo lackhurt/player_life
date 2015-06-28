@@ -13,7 +13,7 @@ use Illuminate\Contracts\Routing\Registrar;
 use App\User;
 use Illuminate\Support\Facades\Blade;
 
-class ResumeController extends Controller {
+class ResumesController extends Controller {
 
     public $resume;
 
@@ -40,7 +40,7 @@ class ResumeController extends Controller {
         Blade::setContentTags('<%', '%>');
         Blade::setEscapedContentTags('<%%', '%%>');
 
-        return view('user.resume.manage')->with([
+        return view('user.resumes.manage')->with([
             'title' => '简历管理',
             'user' => $user
         ]);
