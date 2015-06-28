@@ -1,4 +1,4 @@
-define(['bootstrap.datetimepicker.cn', 'react', 'jsx!app/common/district.jsx'], function($, React, District) {
+define(['bootstrap-datetimepicker-cn', 'react', 'jsx!app/common/district.jsx'], function($, React, District) {
 
     $('.form_date').datetimepicker({
         language:  'zh-CN',

@@ -12,20 +12,22 @@ requirejs.config({
         avalon: 'lib/avalon/1.44/avalon',
         jquery: 'lib/jquery/2.1.3/jquery',
         bootstrap: 'lib/bootstrap/3.3.4/bootstrap',
-        'bootstrap.datetimepicker': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.min',
-        'bootstrap.datetimepicker.cn': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.zh-CN',
+        'bootstrap-datetimepicker': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.min',
+        'bootstrap-datetimepicker-cn': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.zh-CN',
+        'bootstrap-dialog-zh': 'lib/bootstrap/plugins/dialog/i18n_zh',
+        'bootstrap-dialog': 'lib/bootstrap/plugins/dialog/bootstrap-dialog',
         plupload: 'lib/plupload/2.1.4/plupload.full.min',
         react: 'lib/react/0.13.3/react',
         rest: 'lib/rest/rest',
         angular: 'lib/angluar/1.4.1/angular'
     },
     shim: {
-        'bootstrap.datetimepicker': {
+        'bootstrap-datetimepicker': {
             deps: ['jquery', 'bootstrap', 'css!/style/lib/bootstrap/bootstrap-datetimepicker.min.css'],
             exports: '$'
         },
-        'bootstrap.datetimepicker.cn': {
-            deps: ['bootstrap.datetimepicker'],
+        'bootstrap-datetimepicker-cn': {
+            deps: ['bootstrap-datetimepicker'],
             exports: '$'
         },
         'bootstrap': {
