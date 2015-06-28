@@ -1,4 +1,4 @@
-define([], function() {
+define(['bootstrap-dialog-zh'], function(dialog) {
     $(document).on('click', '.js_remove_admin', function() {
         removeAdmin($(this).attr('data-corp-id'), $(this).attr('data-member-id'));
     });
@@ -21,7 +21,7 @@ define([], function() {
             locate.reload();
         });
         request.fail(function(msg) {
-            alert(msg);
+            dialog.alert(msg);
         });
     }
 

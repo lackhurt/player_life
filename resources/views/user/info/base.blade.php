@@ -78,14 +78,8 @@
     </div>
 </div>
 <script>
-
-
-
     require(['app/user/info/base'], function() {
 
     });
-
-
-
 </script>
 @endsection

@@ -20,7 +20,11 @@ class CorpsController extends Controller {
         ]);
     }
 
-    public function getBelong() {
-
+    public function getBelong(UserCorps $userCorps, Guard $guard) {
+        $corps = $userCorps->listCorpsContainsUser(Session::get($guard->getName()));
+        return view('user.corps.belong')->with([
+            'title' => '我加入的团队',
+            'corps' => $corps
+        ]);
     }
 }

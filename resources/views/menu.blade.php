@@ -54,7 +54,31 @@
             战队-创建
         </th>
         <td>
-            <a href="/user/info/contract">/user/info/contract</a>
+            <a href="/corp/create">/corp/create</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            用户-我建的战队
+        </th>
+        <td>
+            <a href="/user/corps/created">/user/corps/created</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            用户-我加入的战队
+        </th>
+        <td>
+            <a href="/user/corps/belong">/user/corps/belong</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            战队-管理
+        </th>
+        <td>
+            <a href="/corp/manage?id=55850ca16803fa32078b4567">/corp/manage?id=55850ca16803fa32078b4567</a>
         </td>
     </tr>
     </tbody>
