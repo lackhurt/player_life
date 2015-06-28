@@ -16,7 +16,8 @@ requirejs.config({
         'bootstrap.datetimepicker.cn': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.zh-CN',
         plupload: 'lib/plupload/2.1.4/plupload.full.min',
         react: 'lib/react/0.13.3/react',
-        rest: 'lib/rest/rest'
+        rest: 'lib/rest/rest',
+        angular: 'lib/angluar/1.4.1/angular'
     },
     shim: {
         'bootstrap.datetimepicker': {
@@ -46,6 +47,9 @@ requirejs.config({
         },
         rest: {
             exports: '$'
+        },
+        angular: {
+            exports: 'angular'
         }
     }
 });
