@@ -82,21 +82,22 @@ class CorpMembers {
 
     public function isBelongToCorp($corpId, $userId) {
 //        var_dump($userId);die;
-        $result = \App\Corp::find([
+        $result = \App\Corp::firstByAttributes([
             '_id' => new \MongoId($corpId),
-            'members' => [
-                '$in' => [
-                    '$elemMatch' => [
-                        '$in' => [
-                            'user_id' => $userId,
-                            'is_admin' => true
-                        ]
-                    ]
-                ]
-            ],
-        ]);
+//            'members' => [
+//                'user_id' => $userId,
+//            ],
 
-        var_dump($result);die;
+//                '$in' => [
+//                    '$elemMatch' => [
+//                        '$in' => [
+//                            'user_id' => $userId,
+//                            'is_admin' => true
+//                        ]
+//                    ]
+//                ]
+        ]);
+        return $result;
     }
 
 
