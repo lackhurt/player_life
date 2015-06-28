@@ -53,6 +53,7 @@ Route::group([
 ], function(){
     Route::controllers([
         'create' => 'Corp\CreateController',
+        'resumes' => 'Corp\ResumesController',
     ]);
 });
 
