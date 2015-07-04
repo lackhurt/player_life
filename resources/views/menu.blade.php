@@ -62,7 +62,7 @@
             简历-管理
         </th>
         <td>
-            <a href="/user/resume/manage">/user/resume</a>
+            <a href="/user/resumes/manage">/user/resume</a>
             <a href="/corp/create">/corp/create</a>
         </td>
     </tr>
