@@ -60,6 +60,15 @@ Route::group([
 
 Route::group([
     'prefix' => 'corp',
+    //'middleware' => ['auth', 'corp.administrator']
+], function(){
+    Route::controllers([
+        'recruit' => 'Corp\RecruitController',
+    ]);
+});
+
+Route::group([
+    'prefix' => 'corp',
     'middleware' => ['auth', 'corp.administrator']
 ], function(){
     Route::controllers([
