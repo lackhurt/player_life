@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 
 
+use App\lib\Rest\Rest;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Guard;
@@ -36,18 +37,16 @@ class ResumesController extends Controller {
 
     public function getManage(Guard $guard) {
         $user = User::find(Session::get($guard->getName()));
-//        var_dump($user);die;
-        Blade::setContentTags('<%', '%>');
-        Blade::setEscapedContentTags('<%%', '%%>');
-
         return view('user.resumes.manage')->with([
             'title' => '简历管理',
             'user' => $user
         ]);
     }
 
-    public function postCreate(Request $request) {
-        var_dump($request->all());
+    public function postCreate(Request $request, Guard $guard) {
+        return Rest::reject('添加失败');
+//        return Rest::resolve($request->all());
+//        return response()->json();
     }
 
 
