@@ -9,7 +9,9 @@ requirejs.config({
     },
     paths: {
         JSXTransformer: 'lib/react/0.13.3/JSXTransformer',
-        avalon: 'lib/avalon/1.44/avalon',
+        avalon: 'lib/avalon/1.44/avalon.shim',
+        text: 'lib/requirejs/plugins/require-text/2.0.12/text',
+        domReady: 'lib/requirejs/plugins/domReady/2.0.1/domReady',
         jquery: 'lib/jquery/2.1.3/jquery',
         bootstrap: 'lib/bootstrap/3.3.4/bootstrap',
         'bootstrap-datetimepicker': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.min',
@@ -37,6 +39,9 @@ requirejs.config({
         'avalon':{
             exports: 'avalon'
         },
+        'domReady':{
+            exports: 'domReady'
+        },
         'plupload': {
             exports: 'plupload'
         },
@@ -54,4 +59,9 @@ requirejs.config({
             exports: 'angular'
         }
     }
+});
+require(['avalon'],function(){
+    avalon.config({
+        interpolate:["{%","%}"]
+    })
 });

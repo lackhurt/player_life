@@ -90,5 +90,14 @@
             <a href="/corp/manage?id=55850ca16803fa32078b4567">/corp/manage?id=55850ca16803fa32078b4567</a>
         </td>
     </tr>
+    <tr>
+        <th>
+            用户-我建的战队
+            战队-招募
+        </th>
+        <td>
+            <a href="/corp/recruit">/corp/recruit</a>
+        </td>
+    </tr>
     </tbody>
 </table>
