@@ -9,14 +9,12 @@ use PhpSpec\Exception\Exception;
 
 class CorpMembers {
     public function isAdministrator($corpId, $userId) {
-        $result = \App\Corp::find([
+        $result = DB::selectCollection('corps')->find([
             '_id' => new \MongoId($corpId),
             'members' => [
-                '$in' => [
-                    '$elemMatch' => [
-                            'user_id' => $userId,
-                            'is_admin' => true
-                    ]
+                '$elemMatch' => [
+                    'user_id' => $userId,
+                    'is_admin' => true
                 ]
             ],
         ]);
@@ -25,7 +23,7 @@ class CorpMembers {
 
 
     public function removeMember($corpId, $userId) {
-        $result = DB::collection('corps')->update([
+        $result = DB::collection('corps')->isAdministrator([
             '_id' => new \MongoId($corpId)
         ], [
             '$pull' => [

@@ -147,7 +147,8 @@ return [
         'Jenssegers\Mongodb\MongodbServiceProvider',
         'App\lib\Uploader\UploaderServiceProvider',
         'App\lib\Rest\RestServiceProvider',
-
+        'Maatwebsite\Excel\ExcelServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider'
 	],
 
 	/*
@@ -197,6 +198,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Uploader'  => 'App\lib\Uploader\UploaderServiceProvider',
 		'Rest'      => 'App\lib\Rest\RestServiceProvider',
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
 	],
 
