@@ -13,8 +13,8 @@ class CorpMembers {
             '_id' => new \MongoId($corpId),
             'members' => [
                 '$elemMatch' => [
-                        'user_id' => $userId,
-                        'is_admin' => true
+                    'user_id' => $userId,
+                    'is_admin' => true
                 ]
             ],
         ]);
