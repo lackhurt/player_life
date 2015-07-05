@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 15-5-17
- * Time: 下午1:52
- */
+
 
 namespace App\Services\User;
 

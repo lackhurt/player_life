@@ -8,8 +8,12 @@ define(['avalon'], function() {
 
 
 
-        avalonAlert: function(e) {
+        resumeLocate: function(e) {
 
+            console.log(this);
+        },
+
+        resumesSubmit: function() {
             submit();
         }
 
@@ -32,4 +36,6 @@ define(['avalon'], function() {
             console.log(msg);
         });
     }
+
+
 });
