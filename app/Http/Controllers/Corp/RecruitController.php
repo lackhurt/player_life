@@ -37,7 +37,7 @@ class RecruitController extends Controller {
         ]);
 
     }
-
+//获取招募列表
     public function postRecruitList() {
 
         $result = $this->service->getRecruitList($this->request->get('corpid'));
