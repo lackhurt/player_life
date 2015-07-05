@@ -40,6 +40,7 @@ class User extends Eloquent implements AuthenticatableContract, CanResetPassword
         'qq',
         'wechat',
         'avatar',
+        'career',
 
     ];
 
