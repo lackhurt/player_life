@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Corp;
 
 use App\Http\Controllers\Controller;
 use App\lib\Rest\Rest;
-use App\lib\Uploader\Uploader;
 use App\Services\Corp\Corp;
 use App\Services\Corp\CorpRecruit;
 use Illuminate\Auth\Guard;
@@ -41,8 +40,10 @@ class RecruitController extends Controller {
     public function postRecruitList() {
 
         $result = $this->service->getRecruitList($this->request->get('corpid'));
-        return response()->json($result);
-
+        if(is_array($result)){
+            return Rest::resolve($result);
+        }
+            return Rest::reject('查询数据库发生错误',$result);
     }
 
     public function postCreateRecruit() {
@@ -56,6 +57,7 @@ class RecruitController extends Controller {
                 $this->request, $validator
             );
         }
+
       //  $corpModel = $this->service->createRecruit($this->request->all(), Session::get($this->guard->getName()));
 
       //  return redirect('/corp/manage?id=' . $corpModel['_id']);

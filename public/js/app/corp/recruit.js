@@ -2,13 +2,14 @@
  * Created by Administrator on 2015/7/4 0004.
  */
 define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, District){
+    var RecruitListCtrl = avalon.define({
+        $id:'RecruitListCtrl',
+
+    })
     var formCtrl = avalon.define({
         $id:'formCtrl',
         roleCheckBoxList:[],
-        roleCheckedList:[],
-        roleClick:function(e){
-
-        },
+        form_data:{},
         saveClick:function(){
 
         },
@@ -26,9 +27,21 @@ define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, Distri
         {name:'领队'},
     ];
 
-
+    var form_data = {
+        tag:'天天向上',
+        title:'招募强力中单',
+        is_show:'on',
+        other_role_tag:'中华好队友',
+        role_checked_list:['核心','其他'],
+        point:{min:1000,max:1300},
+        play_time:'上半夜',
+        sex:'other',
+        info:'',
+    }
 
     formCtrl.roleCheckBoxList = roleCheckBoxList;
+    formCtrl.form_data = form_data;
+
     $.post('/corp/recruit/recruit-list',function(response){
 
         avalon.log('list:%o' ,
