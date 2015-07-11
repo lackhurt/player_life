@@ -80,6 +80,7 @@ Route::group([
 //通用服务
 Route::group(['prefix' => 'common'], function(){
     Route::controllers([
+        'game-picker' => 'Common\GamePickerController',
         'district' => 'Common\DistrictController',
     ]);
 });

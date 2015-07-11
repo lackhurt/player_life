@@ -21,15 +21,45 @@ use PhpSpec\Exception\Exception;
 
 
 class RecruitController extends Controller {
-    public function getIndex(Request $request, Corp $corp, Guard $guard) {
-        $id = $request->get('id');
 
-        return view('corp/recruit')->with(['title' => '战队招募']);
+    public function __construct(Request $request,CorpRecruit $recruit,Guard $guard) {
+        $this->service = $recruit;
+        $this->guard = $guard;
+        $this->request = $request;
+    }
+    public function getIndex( Corp $corp, Guard $guard) {
+        //判断没有战队就提示创建战队
+        //判断没有招募信息则在列表位置提示创建招募信息
+        $id = $this->request->get('id');
+        return view('corp/recruit')->with([
+            'title' => '战队信息',
+            'corp' => $corp->getCorpInfo($id),
+        ]);
+
+    }
+//获取招募列表
+    public function postRecruitList() {
+
+        $result = $this->service->getRecruitList($this->request->get('corpid'));
+        return response()->json($result);
 
     }
 
-    public function postRecruitList(Request $request, CorpRecruit $recruit) {
+    public function postCreateRecruit() {
 
+        $validator = $this->service->validatorCreateRecruit($this->request->all());
+
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $this->request, $validator
+            );
+        }
+      //  $corpModel = $this->service->createRecruit($this->request->all(), Session::get($this->guard->getName()));
+
+      //  return redirect('/corp/manage?id=' . $corpModel['_id']);
+        return Rest::resolve($this->request->all());
     }
 
 }

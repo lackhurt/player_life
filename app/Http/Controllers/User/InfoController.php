@@ -35,9 +35,9 @@ class InfoController extends Controller
     public function getBase(Guard $guard) {
         $user = User::find(Session::get($guard->getName()));
         return view('user.info.base')->with(array(
-                'user' => $user,
-                'title' =>  '基础信息',
-            ));
+            'user' => $user,
+            'title' =>  '基础信息',
+        ));
     }
 
     //基础信息表单参数接收
@@ -134,8 +134,12 @@ class InfoController extends Controller
     }
 
     //游戏生涯
-    public function getCareer() {
-
+    public function getCareer(Guard $guard) {
+        $user = User::find(Session::get($guard->getName()));
+        return view('user.info.career')->with(array(
+            'user' => $user,
+            'title' =>  '游戏生涯',
+        ));
     }
 
 
