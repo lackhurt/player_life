@@ -52,11 +52,17 @@ class UserResumes {
         ], [
                 '$pull' => [
                     'games' => [
-                        'k' => 1
+                        [$data['game']] => [
+                            'title' => $data['title'],
+                            'platform' => $data['platform'],
+                            'network_provider' => $data['network_provider'],
+                        ]
                     ]
                 ]
 
         ]);
+
+        return $result;
     }
 
     //获取简历列表
