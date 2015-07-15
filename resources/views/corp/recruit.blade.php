@@ -41,6 +41,25 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr >
+                            <td class="col-md-2  text-center">
+                                <div class="col-md-12">
+                                    <i class="col-md-5">{{$corp->primary_game}}</i>
+                                    <i class="col-md-5">{{$corp->nickname}}</i>
+                                </div>
+                                <div class="col-md-12"><b>主力替补</b></div>
+                            </td>
+                            <td class="col-md-8">
+                                <div class="col-md-8">
+                                    急需正式/替补中单各一名，
+                                </div>
+                                <div class="col-md-4">
+                                    <a class="btn btn-default" href="#" role="button">修改</a>
+                                    <a class="btn btn-default" href="#" role="button">显示</a>
+                                    <a class="btn btn-default" href="#" role="button">删除</a>
+                                </div>
+                            </td>
+                        </tr>
 
                     </table>
                 </div>
@@ -55,16 +74,16 @@
                         <form id="infoForm" ms-controller="formCtrl">
                             <div class="form-group">
                                 <label>招募标签:</label>
-                                <input type="email" class="form-control" placeholder="请填写4字以内的标签">
+                                <input type="text" class="form-control" placeholder="请填写4字以内的标签" ms-duplex="form_data.tag">
                             </div>
                             <div class="form-group">
                                 <label>招募标题:</label>
-                                <input type="email" class="form-control" placeholder="填写个诱人的标题">
+                                <input type="text" class="form-control" placeholder="填写个诱人的标题" ms-duplex="form_data.title">
                             </div>
                             <div class="form-group">
                                 <label>招募开关设置:</label>
-                                <input type="radio" name="is_show" class="radio-inline" value="on" checked>开启
-                                <input type="radio" name="is_show" class="radio-inline" value="off">关闭
+                                <input type="radio"  class="radio-inline" value="on" ms-duplex-string="form_data.is_show">开启
+                                <input type="radio"  class="radio-inline" value="off" ms-duplex-string="form_data.is_show">关闭
                             </div>
                             <div class="form-group">
                                 <label>招募条件设置:</label>
@@ -76,27 +95,27 @@
                                         <div class="checkbox">
 
                                             <label ms-repeat-el="roleCheckBoxList" ms-on-click="roleClick()">
-                                                <input type="checkbox" name="" class="radio-inline" value="off"/>{% el.name %}&nbsp;                                        </label>
+                                                <input type="checkbox" name="" class="radio-inline" ms-duplex-string="form_data.role_checked_list" ms-attr-value="el.name"/>{% el.name %}&nbsp;                                        </label>
 
                                             <label>
-                                                <input type="checkbox" name="other" class="radio-inline" value="off"/>其他
-                                                <input type="text" name="otherTag" class="radio-inline" value=""/>
+                                                <input type="checkbox" name="other" class="radio-inline" ms-duplex-string="form_data.role_checked_list" value="其他"/>其他
+                                                <input type="text" name="otherTag" class="radio-inline"  ms-duplex="form_data.other_role_tag"/>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="">分数:</label>
                                         <label>
-                                            <input type="number" name="pointMin" class="radio-inline" value=""/>
+                                            <input type="number"  class="radio-inline" ms-duplex-number="form_data.point.min"/>
                                             &nbsp;--
-                                            <input type="number" name="pointMax" class="radio-inline" value=""/>
+                                            <input type="number"  class="radio-inline" ms-duplex-number="form_data.point.max"/>
                                         </label>
                                     </div>
                                     <div class="form-group">
 
                                         <label>时间:</label>
                                         <label>
-                                            <select name="gameTime" id="">
+                                            <select name="gameTime" id="" ms-duplex="form_data.play_time">
                                                 <option value="全天">全天</option>
                                                 <option value="上午">上午</option>
                                                 <option value="下午">下午</option>
@@ -111,13 +130,13 @@
 
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="" class="radio-inline" value="off"/>男&nbsp;
+                                                <input type="radio" ms-duplex-string="form_data.sex" class="radio-inline" value="man"/>男&nbsp;
                                             </label>
                                             <label>
-                                                <input type="radio" name="" class="radio-inline" value="off"/>女&nbsp;
+                                                <input type="radio" ms-duplex-string="form_data.sex" class="radio-inline" value="female"/>女&nbsp;
                                             </label>
                                             <label>
-                                                <input type="radio" name="" class="radio-inline" value="off"/>其他&nbsp;
+                                                <input type="radio" ms-duplex-string="form_data.sex" class="radio-inline" value="other"/>其他&nbsp;
                                             </label>
                                         </div>
 
@@ -144,14 +163,14 @@
                                     4、能参加线下活动
                                     5、颜值高
                                     6、男的
-                                    7、不16——28岁之间"></textarea>
+                                    7、不16——28岁之间" ms-duplex="form_data.info"></textarea>
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-1">
-                                    <button type="button" class="btn btn-primary" ms-on-click="saveClick">保存</button>
-                                    <button type="button" class="btn btn-primary" ms-on-click="releaseClick">发布</button>
+                                    <button type="button" class="btn btn-primary" ms-click="saveClick">保存</button>
+                                    <button type="button" class="btn btn-primary" ms-click="releaseClick">发布</button>
                                 </div>
                             </div>
                         </form>

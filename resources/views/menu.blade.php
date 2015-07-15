@@ -96,7 +96,7 @@
             战队-招募
         </th>
         <td>
-            <a href="/corp/recruit">/corp/recruit</a>
+            <a href="/corp/recruit?id=55a238ed58bc734b448b4567">/corp/recruit?id=55a238ed58bc734b448b4567</a>
         </td>
     </tr>
     </tbody>

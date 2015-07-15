@@ -5,12 +5,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PhpSpec\Exception\Exception;
 
-class Corp {
+class Corp
+{
 
     /**
      * Create a new corp instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return Corp
      */
     public function create(array $data, $creatorId)
@@ -33,7 +34,8 @@ class Corp {
         ]);
     }
 
-    public function update(array $data, $id) {
+    public function update(array $data, $id)
+    {
         $corp = new \App\Corp();
         $corp->_id = $id;
         return $corp->update([
@@ -43,7 +45,8 @@ class Corp {
         ]);
     }
 
-    public function getCorpInfo($id) {
+    public function getCorpInfo($id)
+    {
         $corpModel = \App\Corp::find($id);
 
         if (empty($corpModel)) {
@@ -54,7 +57,7 @@ class Corp {
 
         $members = $corpModel['members'];
 
-        array_walk($members, function($member) use(&$memberIdArr) {
+        array_walk($members, function ($member) use (&$memberIdArr) {
             $memberIdArr[] = new \MongoId($member['user_id']);
         });
 
@@ -68,15 +71,17 @@ class Corp {
         return $corpModel;
     }
 
-    private function convertMember(&$members, $users) {
-        array_walk($members, function(&$member, $index) use ($users) {
+    private function convertMember(&$members, $users)
+    {
+        array_walk($members, function (&$member, $index) use ($users) {
             $member['avatar'] = $users->get($index)->avatar;
             $member['gender'] = $users->get($index)->gender;
             $member['nickname'] = $users->get($index)->nickname;
         });
     }
 
-    public function validatorCreateData(array $data) {
+    public function validatorCreateData(array $data)
+    {
         $rules = [
 //            "phone" => ['required', 'numeric', 'regex: /^(\+86)?((13[0-9])|(15[0-9])|(17[08])|(18[0-9]))\d{8}$/'],
 //            "password" => 'required|confirmed',
