@@ -51,8 +51,8 @@ class ResumesController extends Controller {
         }
 
         $createResume = $userResumes->createResume($request->all());
-
-        return Rest::reject($createResume);
+        return $createResume;
+//        return Rest::reject($createResume);
     }
 
 
