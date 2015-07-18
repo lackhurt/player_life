@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div ms-controller="RecruitListCtrl">
+                <div ms-controller="recruitListCtrl">
                     <input type="hidden" name="id" value="$corp['_id']"/>
 
                     <div class="row">
@@ -22,22 +22,22 @@
                     </div>
 
                     <table class="table table-bordered  table-hover col-md-12 ">
-                        <tr>
+                        <tr ms-repeat="list">
                             <td class="col-md-2  text-center">
                                 <div class="col-md-12">
                                     <i class="col-md-5">{{$corp->primary_game}}</i>
                                     <i class="col-md-5">{{$corp->nickname}}</i>
                                 </div>
-                                <div class="col-md-12"><b>主力替补</b></div>
+                                <div class="col-md-12"><b>{% el.tag %}</b></div>
                             </td>
                             <td class="col-md-8">
                                 <div class="col-md-8">
-                                    急需正式/替补中单各一名，
+                                    {%el.title%}
                                 </div>
                                 <div class="col-md-4">
-                                    <a class="btn btn-default" href="#" role="button">修改</a>
-                                    <a class="btn btn-default" href="#" role="button">显示</a>
-                                    <a class="btn btn-default" href="#" role="button">删除</a>
+                                    <a class="btn btn-default" role="button" ms-click="edit($index)">修改</a>
+                                    <a class="btn btn-default" role="button" ms-click="toggle($index)">显示</a>
+                                    <a class="btn btn-default" role="button" ms-click="del($index)">删除</a>
                                 </div>
                             </td>
                         </tr>
@@ -54,9 +54,9 @@
                                     急需正式/替补中单各一名，
                                 </div>
                                 <div class="col-md-4">
-                                    <a class="btn btn-default" href="#" role="button">修改</a>
-                                    <a class="btn btn-default" href="#" role="button">显示</a>
-                                    <a class="btn btn-default" href="#" role="button">删除</a>
+                                    <a class="btn btn-default" role="button">修改</a>
+                                    <a class="btn btn-default"  role="button">显示</a>
+                                    <a class="btn btn-default"  role="button">删除</a>
                                 </div>
                             </td>
                         </tr>

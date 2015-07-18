@@ -2,16 +2,24 @@
  * Created by Administrator on 2015/7/4 0004.
  */
 define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, District){
-    var RecruitListCtrl = avalon.define({
-        $id:'RecruitListCtrl',
+    var recruitListCtrl = avalon.define({
+        $id:'recruitListCtrl',
+        list:[],
+        edit:function(){
 
+        },
+        del:function(){
+            deleteRecruit
+        }
     })
     var formCtrl = avalon.define({
         $id:'formCtrl',
         roleCheckBoxList:[],
+        corpId:'55a238ed58bc734b448b4567',
         form_data:{},
         saveClick:function(){
-
+            var data = getFormData();
+            saveInfo(data);
         },
         releaseClick:function(){
 
@@ -42,18 +50,23 @@ define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, Distri
     formCtrl.roleCheckBoxList = roleCheckBoxList;
     formCtrl.form_data = form_data;
 
-    $.post('/corp/recruit/recruit-list',function(response){
+    console.log(formCtrl.form_data.$model);
 
-        avalon.log('list:%o' ,
-        response);
+    var request = $.restPost('/corp/recruit/recruit-list',{corpId:formCtrl.corpId});
+    request.done(function(data){
+        avalon.log(data);
+        recruitListCtrl.list = data;
+    })
+    function saveInfo(data){
+        var request = $.restPost('/corp/recruit/create-recruit',data)
+        request.done(function(response){
 
-    });
-    function saveInfo(){
-
+        })
     }
     function getFormData(){
-
-        return {};
+        var formData = formCtrl.form_data.$model;
+        formData.corpId = formCtrl.corpId;
+        return formCtrl.form_data.$model;
     }
     avalon.scan(document.body);
     District.renderTo('#location', 'location');
