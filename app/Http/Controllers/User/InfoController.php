@@ -138,10 +138,14 @@ class InfoController extends Controller
         $user = User::find(Session::get($guard->getName()));
         return view('user.info.career')->with(array(
             'user' => $user,
-            'title' =>  '游戏生涯',
+            'title' =>  '游戏生涯'
         ));
     }
 
+    public function postCareer(Guard $guard, Request $request) {
+        $this->userInfo->updateCareer($request->all(), Session::get($guard->getName()));
+        return Rest::resolve([]);
+    }
 
     //游戏简历
     public function Resume() {

@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <input type="text" ms-duplex="query" placeholder="请选择游戏" class="form-control"/>
+    </div>
+    <div class="panel-body">
+        <ul class="nav nav-tabs" role="tablist">
+            <li ms-repeat="group" ms-attr-role="{%unionTabId + $key%}" ms-class="active:$key === 'ABC'" ms-visible="$val.count">
+                <a ms-attr-href="#{%unionTabId + $key%}" ms-attr-aria-controls="$key" role="tab" data-toggle="tab">{%$key%} <span class="badge">{%$val.count%}</span></a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div ms-repeat="group" ms-attr-role="{%unionTabId + $key%}" class="tab-pane" ms-class="active:$key === 'ABC'" ms-attr-id="{%unionTabId + $key%}">
+                <div ms-repeat="$val.letterIndex" ms-visible="$val.length">
+                    <span class="label label-default">{%$key%}</span>
+                    <ul class="list-inline">
+                        <li ms-repeat="$val">
+                            <a href="javascript:;" ms-on-click="select(el)">{%el.name%}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

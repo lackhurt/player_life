@@ -4,6 +4,7 @@
 namespace App\Services\User;
 
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Validator;
 
@@ -142,5 +143,14 @@ class UserInfo {
         ]);
     }
 
+    public function updateCareer(array $careerData, $userId) {
 
-} 
+        DB::selectCollection('users')->update([
+            '_id' => new \MongoId($userId)
+        ], [
+            '$set' => [
+                'career' => $careerData
+            ]
+        ]);
+    }
+}
