@@ -1,8 +1,7 @@
-define(['app/common/avalon_widget/game_picker', 'bootstrap-dialog-zh'], function(avalon, dialog) {
+define(['app/common/avalon_widget/game_picker', 'bootstrap-dialog-zh', 'app/common/avalon_widget/page_bar'], function(avalon, dialog) {
 
 
     function initCareerModel(data) {
-        console.log(data);
         var career = avalon.define({
             $id: 'career',
             formData: {
@@ -13,7 +12,6 @@ define(['app/common/avalon_widget/game_picker', 'bootstrap-dialog-zh'], function
         });
 
         avalon.scan(document.body);
-
         return career;
     }
 
@@ -48,11 +46,11 @@ define(['app/common/avalon_widget/game_picker', 'bootstrap-dialog-zh'], function
         playedGames.games = data.played_games;
         playedGames.playBest = data.play_best;
 
+        avalon.scan(document.body);
+
         avalon.vmodels.playedGamesGamePicker.$watch('currentSelectedGame', function() {
             addGame(avalon.vmodels.playedGamesGamePicker.$model.currentSelectedGame, playedGames);
         });
-
-        avalon.scan(document.body);
 
         return playedGames;
     }
@@ -62,8 +60,6 @@ define(['app/common/avalon_widget/game_picker', 'bootstrap-dialog-zh'], function
         career = initCareerModel(data);
         playedGames = initPlayedGamesModel(data);
     }
-
-
 
     $('#submitCareer').on('click', function(e) {
         e.preventDefault();

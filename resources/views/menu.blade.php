@@ -51,6 +51,14 @@
     </tr>
     <tr>
         <th>
+            用户信息-游戏生涯
+        </th>
+        <td>
+            <a href="/user/info/career">/user/info/contract</a>
+        </td>
+    </tr>
+    <tr>
+        <th>
             战队-创建
         </th>
         <td>
