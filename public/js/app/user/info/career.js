@@ -12,6 +12,8 @@ define(['app/common/avalon_widget/game_picker', 'bootstrap-dialog-zh'], function
             }
         });
 
+        avalon.scan(document.body);
+
         return career;
     }
 
@@ -46,11 +48,11 @@ define(['app/common/avalon_widget/game_picker', 'bootstrap-dialog-zh'], function
         playedGames.games = data.played_games;
         playedGames.playBest = data.play_best;
 
-        avalon.scan(document.body);
-
         avalon.vmodels.playedGamesGamePicker.$watch('currentSelectedGame', function() {
             addGame(avalon.vmodels.playedGamesGamePicker.$model.currentSelectedGame, playedGames);
         });
+
+        avalon.scan(document.body);
 
         return playedGames;
     }

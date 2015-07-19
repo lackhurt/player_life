@@ -33,7 +33,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label">竞技游戏</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="primary_game" value="">
+                            <input type="text" class="form-control" name="primary_game" id="primaryGame" readonly value="">
+                            <div ms-controller="primaryGame" ms-widget="gamePicker, primaryGamePicker"></div>
                         </div>
                     </div>
 
@@ -67,7 +68,7 @@
         </div>
     </div>
     <script>
-        require(['app/corp/badge'], function(badge) {
+        require(['app/corp/badge', 'app/corp/create'], function(badge) {
             badge.processUploadBadge('{{$upload_token}}');
         });
     </script>

@@ -23,7 +23,7 @@ class CorpMembers {
 
 
     public function removeMember($corpId, $userId) {
-        $result = DB::collection('corps')->isAdministrator([
+        $result = DB::selectCollection('corps')->update([
             '_id' => new \MongoId($corpId)
         ], [
             '$pull' => [
