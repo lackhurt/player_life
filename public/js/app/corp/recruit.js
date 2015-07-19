@@ -2,29 +2,51 @@
  * Created by Administrator on 2015/7/4 0004.
  */
 define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, District){
-    var recruitListCtrl = avalon.define({
-        $id:'recruitListCtrl',
-        list:[],
-        edit:function(){
-
-        },
-        del:function(){
-            deleteRecruit
-        }
-    })
-    var formCtrl = avalon.define({
-        $id:'formCtrl',
-        roleCheckBoxList:[],
-        corpId:'55a238ed58bc734b448b4567',
-        form_data:{},
+    var pageCtrl = avalon.define({
+        $id:'pageCtrl',
         saveClick:function(){
-            var data = getFormData();
+            var data = getFormData(formCtrl);
+            delete data.roleCheckBoxList;
+            delete data.isFormShow;
             saveInfo(data);
         },
         releaseClick:function(){
 
         }
+    })
+    var recruitListCtrl = avalon.define({
+        $id:'recruitListCtrl',
+        list:[],
+        edit:function(index){
+            setFormData(formCtrl,recruitListCtrl.list[index]);
+            formCtrl.isFormShow = true;
+        },
+        del:function(index){
+            deleteRecruit(index)
+        },
+        add:function(){
+            setFormData(formCtrl,defaultFormData);
+            formCtrl.isFormShow = true;
+        }
+    })
+    var formCtrl = avalon.define({
+        $id:'formCtrl',
+        roleCheckBoxList:[],
+        corpId:'',
+        recruitIndex:'',
+        tag:'',
+        title:'',
+        is_show:'on',
+        other_role_tag:'',
+        role_checked_list:[],
+        point_min:0,
+        point_max:0,
+        play_time:'上半夜',
+        sex:'other',
+        info:'',
+        isFormShow:false
     });
+
     var roleCheckBoxList = [
         {name:'核心'},
         {name:'中单'},
@@ -35,39 +57,70 @@ define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, Distri
         {name:'领队'},
     ];
 
-    var form_data = {
-        tag:'天天向上',
-        title:'招募强力中单',
+    var defaultFormData = {
+        tag:'',
+        title:'',
+        recruitIndex:false,
         is_show:'on',
-        other_role_tag:'中华好队友',
-        role_checked_list:['核心','其他'],
-        point:{min:1000,max:1300},
+        other_role_tag:'',
+        role_checked_list:[],
+        point_min:0,
+        point_max:0,
         play_time:'上半夜',
         sex:'other',
         info:'',
     }
 
     formCtrl.roleCheckBoxList = roleCheckBoxList;
-    formCtrl.form_data = form_data;
 
-    console.log(formCtrl.form_data.$model);
+    function setFormData(vm,data){
+        var model = vm.$model;
+        $.each(data,function(key,val){
+            if(!(typeof(model[key]) == "undefined")){
+                formCtrl[key] = val;
+            }
+        })
+    }
+    function getFormData(vm){
+        var model = vm.$model;
+        var result = JSON.stringify(model);
+        return JSON.parse(result);
+    }
+    function getRecruitList(){
+        avalon.log('getRecruitList is going')
+        var request = $.restPost('/corp/recruit/recruit-list',{corpId:formCtrl.corpId});
+        request.done(function(data){
+            avalon.log(data);
+            recruitListCtrl.list = data;
+            avalon.log('getRecruitList is done')
+        })
+    }
 
-    var request = $.restPost('/corp/recruit/recruit-list',{corpId:formCtrl.corpId});
-    request.done(function(data){
-        avalon.log(data);
-        recruitListCtrl.list = data;
-    })
     function saveInfo(data){
         var request = $.restPost('/corp/recruit/create-recruit',data)
         request.done(function(response){
-
+            getRecruitList();
         })
     }
-    function getFormData(){
-        var formData = formCtrl.form_data.$model;
-        formData.corpId = formCtrl.corpId;
-        return formCtrl.form_data.$model;
+
+    function deleteRecruit(index){
+        console.log(index)
+        var data = {corpId:formCtrl.corpId,recruitIndex:index};
+        var request = $.restPost('/corp/recruit/delete-recruit',data);
+        request.done(function(data){
+            avalon.log(data);
+        })
     }
+
     avalon.scan(document.body);
     District.renderTo('#location', 'location');
+
+    return {
+        setCorpId:function(corpId){
+            formCtrl.corpId = corpId;
+        },
+        init:function(){
+            getRecruitList();
+        }
+    }
 })

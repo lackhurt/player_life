@@ -34,6 +34,7 @@ class RecruitController extends Controller {
         return view('corp/recruit')->with([
             'title' => '战队信息',
             'corp' => $corp->getCorpInfo($id),
+            'corpId' => $id,
         ]);
 
     }
@@ -61,8 +62,12 @@ class RecruitController extends Controller {
         }
 
         $result = $this->service->createRecruit(Input::all(), Session::get($this->guard->getName()));
+        if($result['ok'] == 1){
+            return Rest::resolve($result);
+        }else{
+            return Rest::reject('数据库发生错误',$result);
+        }
 
-        return $result;
     }
 
     public function postDeleteRecruit() {
@@ -75,7 +80,8 @@ class RecruitController extends Controller {
                 $this->request, $validator
             );
         }
-        $result = $this->service->deleteRecruit(Input::get('corpId'), Input::get('index'));
+        $result = $this->service->deleteRecruit(Input::get('corpId'), Input::get('recruitIndex'));
+        return $result;
     }
 
 }
