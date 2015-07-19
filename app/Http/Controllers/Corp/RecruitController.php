@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Session;
 use PhpSpec\Exception\Exception;
+use Input;
 
 
 class RecruitController extends Controller {
@@ -39,16 +40,17 @@ class RecruitController extends Controller {
 //获取招募列表
     public function postRecruitList() {
 
-        $result = $this->service->getRecruitList($this->request->get('corpid'));
+        $result = $this->service->getRecruitList($this->request->get('corpId'));
         if(is_array($result)){
             return Rest::resolve($result);
-        }
+        }else{
             return Rest::reject('查询数据库发生错误',$result);
+        }
     }
 
     public function postCreateRecruit() {
 
-        $validator = $this->service->validatorCreateRecruit($this->request->all());
+        $validator = $this->service->validatorCreateRecruit(Input::all());
 
 
         if ($validator->fails())
@@ -58,10 +60,22 @@ class RecruitController extends Controller {
             );
         }
 
-      //  $corpModel = $this->service->createRecruit($this->request->all(), Session::get($this->guard->getName()));
+        $result = $this->service->createRecruit(Input::all(), Session::get($this->guard->getName()));
 
-      //  return redirect('/corp/manage?id=' . $corpModel['_id']);
-        return Rest::resolve($this->request->all());
+        return $result;
+    }
+
+    public function postDeleteRecruit() {
+        $validator = $this->service->validatorDeleteRecruit(Input::all());
+
+
+        if ($validator->fails())
+        {
+            $this->throwValidationException(
+                $this->request, $validator
+            );
+        }
+        $result = $this->service->deleteRecruit(Input::get('corpId'), Input::get('index'));
     }
 
 }

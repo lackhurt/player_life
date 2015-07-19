@@ -12,19 +12,62 @@ class CorpRecruit {
 
 
     public function getRecruitList($corpId){
-      //  $corp = DB::getCollection('corps')->find();
-        $result = \App\Corp::find($corpId)->get(['recruit']);
-//        $result = [];
-//        foreach($corp as $v){
-//            $result[] = $v;
-//        }
-        return $result;
-
+        $corp = Corp::find($corpId);
+        $result = json_decode(json_encode($corp),true);
+        return array_key_exists('recruit',$result)?$result['recruit']:[];
     }
 
-    public function createRecruit() {
+    public function createRecruit($request,$user_id) {
+        $result = false;
+        if($request['corpId']){
+            $corpId = $request['corpId'];
+            $recruitIndex = array_key_exists('recruitIndex',$request)?$request['recruitIndex']:false;
+            unset($request['corpId'],$request['recruitIndex']);
+            $request['user_id'] = $user_id;
+            if($recruitIndex){
+                $result = $this->updateRecruitData($corpId, $recruitIndex, $request);
+            }else{
+                $result = $this->createRecruitData($corpId, $request);
+            }
 
+        }
+        return $result;
+    }
 
+    public function deleteRecruit($corpId, $recruitIndex){
+        $result = DB::getMongoDB()->corps->update([
+            '_id' => new \MongoId($corpId)
+        ], [
+            '$pull' => [
+                'recruit.'.$recruitIndex => []
+            ]
+        ]);
+        return $result;
+    }
+
+    private function updateRecruitData($corpId,$recruitIndex,$data){
+        $data['update_time'] = time();
+        $result = DB::getMongoDB()->corps->update([
+            '_id' => new \MongoId($corpId)
+        ], [
+            '$set' => [
+                'recruit.'.$recruitIndex => $data
+            ]
+        ]);
+        return $result;
+    }
+
+    private function createRecruitData($corpId,$data) {
+        $data['update_time'] = time();
+        $data['create_time'] = time();
+        $result = DB::getMongoDB()->corps->update([
+            '_id' => new \MongoId($corpId)
+        ], [
+            '$push' => [
+                'recruit' => $data
+            ]
+        ]);
+        return $result;
     }
 
 
