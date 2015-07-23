@@ -8,6 +8,11 @@
     <script src="/js/lib/requirejs/2.1.18/require.js"></script>
     <script src="/js/lib/jquery/2.1.3/jquery.js"></script>
     <script src="/js/config.js"></script>
+    <style>
+        [ms-controller],[ms-important]{
+            visibility: hidden;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
