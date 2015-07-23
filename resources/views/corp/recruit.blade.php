@@ -37,7 +37,8 @@
                                 <div class="col-md-4">
                                     <a class="btn btn-default" role="button" ms-click="edit($index)">修改</a>
                                     <a class="btn btn-default" role="button" ms-click="toggle(el.recruitIndex)">显示</a>
-                                    <a class="btn btn-default" role="button" ms-click="del(el.recruitIndex)" ms-click-1="$remove">删除</a>
+                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruitIndex)">关闭</a>
+                                    <a class="btn btn-default" role="button" ms-click="del(el.recruitIndex,$remove)" >删除</a>
                                 </div>
                             </td>
                         </tr>

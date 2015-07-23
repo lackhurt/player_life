@@ -1,13 +1,13 @@
 /**
  * Created by Administrator on 2015/7/4 0004.
  */
-define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, District){
+define(['react', 'jsx!app/common/district.jsx','bootstrap-dialog-zh','avalon'],function( React, District, dialog){
     var pageCtrl = avalon.define({
         $id:'pageCtrl',
+        isFormShow:false,
         saveClick:function(){
             var data = getFormData(formCtrl);
-            delete data.roleCheckBoxList;
-            delete data.isFormShow;
+            delete data.roleCheckBoxList;            
             saveInfo(data);
         },
         releaseClick:function(){
@@ -19,14 +19,22 @@ define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, Distri
         list:[],
         edit:function(index){
             setFormData(formCtrl,recruitListCtrl.list[index]);
-            formCtrl.isFormShow = true;
+            pageCtrl.isFormShow = true;
         },
-        del:function(index){
-            deleteRecruit(index)
+        del:function(index , remove){
+            dialog.confirm('确认删除招募？',function(result){
+                if(result){
+                    deleteRecruit(index)
+                    remove()
+                }
+            })
         },
         add:function(){
             setFormData(formCtrl,defaultFormData);
-            formCtrl.isFormShow = true;
+            pageCtrl.isFormShow = true;
+        },
+        toggle:function(recruitIndex){
+
         }
     })
     var formCtrl = avalon.define({
@@ -44,7 +52,6 @@ define(['react', 'jsx!app/common/district.jsx','avalon'],function( React, Distri
         play_time:'上半夜',
         sex:'other',
         info:'',
-        isFormShow:false
     });
 
     var roleCheckBoxList = [
