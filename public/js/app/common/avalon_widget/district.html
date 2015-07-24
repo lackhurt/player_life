@@ -1,0 +1,15 @@
+<div>
+    <div class="col-md-3" >
+        <select class="form-control"  ms-duplex-string="province_id" data-duplex-changed="provinceChanged">
+            <option value="-1">请选择</option>
+            <option ms-attr-value="el.id" ms-repeat="provinceList">{% el.name %}</option>
+        </select>
+    </div>
+    <div class="col-md-3" >
+        <select class="form-control"  ms-duplex-string="city_id" >
+            <option value="-1">请选择</option>
+            <option ms-attr-value="el.id" ms-repeat="cityList">{% el.name %}</option>
+        </select>
+    </div>
+</div>
+

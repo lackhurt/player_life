@@ -1,13 +1,14 @@
 /**
  * Created by Administrator on 2015/7/4 0004.
  */
-define(['react', 'jsx!app/common/district.jsx','bootstrap-dialog-zh','avalon'],function( React, District, dialog){
+define(['react', 'app/common/avalon_widget/district','bootstrap-dialog-zh','avalon'],function( React, district, dialog){
     var pageCtrl = avalon.define({
         $id:'pageCtrl',
-        isFormShow:false,
+        isFormShow:true,
         saveClick:function(){
+            putDistrictInfoIntoForm();
             var data = getFormData(formCtrl);
-            delete data.roleCheckBoxList;            
+            delete data.roleCheckBoxList;
             saveInfo(data);
         },
         releaseClick:function(){
@@ -19,6 +20,7 @@ define(['react', 'jsx!app/common/district.jsx','bootstrap-dialog-zh','avalon'],f
         list:[],
         edit:function(index){
             setFormData(formCtrl,recruitListCtrl.list[index]);
+            avalon.vmodels.district_1.setDistrict(formCtrl.province_id, formCtrl.city_id);
             pageCtrl.isFormShow = true;
         },
         del:function(index , remove){
@@ -30,13 +32,25 @@ define(['react', 'jsx!app/common/district.jsx','bootstrap-dialog-zh','avalon'],f
             })
         },
         add:function(){
+            avalon.log('do add')
             setFormData(formCtrl,defaultFormData);
+            avalon.vmodels.district_1.setDistrict(formCtrl.province_id, formCtrl.city_id);
             pageCtrl.isFormShow = true;
         },
         toggle:function(recruitIndex){
 
         }
     })
+
+    var districtCtrl = avalon.define({
+        $id:'districtCtrl',
+        $opt:{
+            province_id:'-1',
+            city_id:'-1',
+        }
+
+    })
+
     var formCtrl = avalon.define({
         $id:'formCtrl',
         roleCheckBoxList:[],
@@ -52,7 +66,13 @@ define(['react', 'jsx!app/common/district.jsx','bootstrap-dialog-zh','avalon'],f
         play_time:'上半夜',
         sex:'other',
         info:'',
+        province_id:'-1',
+        city_id:'-1',
+        province_name:'',
+        city_name:''
     });
+
+
 
     var roleCheckBoxList = [
         {name:'核心'},
@@ -76,6 +96,8 @@ define(['react', 'jsx!app/common/district.jsx','bootstrap-dialog-zh','avalon'],f
         play_time:'上半夜',
         sex:'other',
         info:'',
+        province_id:'-1',
+        city_id:'-1'
     }
 
     formCtrl.roleCheckBoxList = roleCheckBoxList;
@@ -119,8 +141,15 @@ define(['react', 'jsx!app/common/district.jsx','bootstrap-dialog-zh','avalon'],f
         })
     }
 
+    function putDistrictInfoIntoForm(){
+        var districtInfo = avalon.vmodels.district_1.getDistrictInfo();
+        formCtrl.province_id = districtInfo.province_id;
+        formCtrl.province_name = districtInfo.province_name;
+        formCtrl.city_id = districtInfo.city_id;
+        formCtrl.city_name = districtInfo.city_name;
+    }
+
     avalon.scan(document.body);
-    District.renderTo('#location', 'location');
 
     return {
         setCorpId:function(corpId){

@@ -38,7 +38,8 @@
                                     <a class="btn btn-default" role="button" ms-click="edit($index)">修改</a>
                                     <a class="btn btn-default" role="button" ms-click="toggle(el.recruitIndex)">显示</a>
                                     <a class="btn btn-default" role="button" ms-click="toggle(el.recruitIndex)">关闭</a>
-                                    <a class="btn btn-default" role="button" ms-click="del(el.recruitIndex,$remove)" >删除</a>
+                                    <a class="btn btn-default" role="button"
+                                       ms-click="del(el.recruitIndex,$remove)">删除</a>
                                 </div>
                             </td>
                         </tr>
@@ -54,8 +55,9 @@
 
                     </div>
                     <div class="row">
-                        <form id="infoForm" >
+                        <form id="infoForm">
                             <input type="hidden" name="recruitIndex" ms-attr-value=""/>
+
                             <div class="form-group">
                                 <label>招募标签:</label>
                                 <input type="text" class="form-control" placeholder="请填写4字以内的标签" ms-duplex="tag">
@@ -66,33 +68,35 @@
                             </div>
                             <div class="form-group">
                                 <label>招募开关设置:</label>
-                                <input type="radio"  class="radio-inline" value="on" ms-duplex-string="is_show">开启
-                                <input type="radio"  class="radio-inline" value="off" ms-duplex-string="is_show">关闭
+                                <input type="radio" class="radio-inline" value="on" ms-duplex-string="is_show">开启
+                                <input type="radio" class="radio-inline" value="off" ms-duplex-string="is_show">关闭
                             </div>
                             <div class="form-group">
                                 <label>招募条件设置:</label>
 
                                 <div class="col-md-10 col-md-offset-1">
                                     <div class="form-group">
-                                        <label >角色:</label>
+                                        <label>角色:</label>
 
                                         <div class="checkbox">
 
-                                            <label ms-repeat-el="roleCheckBoxList" >
-                                                <input type="checkbox" name="" class="radio-inline" ms-duplex-string="role_checked_list" ms-attr-value="el.name"/>{% el.name %}&nbsp;                                        </label>
+                                            <label ms-repeat-el="roleCheckBoxList">
+                                                <input type="checkbox" name="" class="radio-inline"
+                                                       ms-duplex-string="role_checked_list" ms-attr-value="el.name"/>{% el.name %}&nbsp;                                        </label>
 
                                             <label>
-                                                <input type="checkbox" name="other" class="radio-inline" ms-duplex-string="role_checked_list" value="其他"/>其他
-                                                <input type="text"  class="radio-inline"  ms-duplex="other_role_tag"/>
+                                                <input type="checkbox" name="other" class="radio-inline"
+                                                       ms-duplex-string="role_checked_list" value="其他"/>其他
+                                                <input type="text" class="radio-inline" ms-duplex="other_role_tag"/>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="">分数:</label>
                                         <label>
-                                            <input type="number"  class="radio-inline" ms-duplex-number="point_min"/>
+                                            <input type="number" class="radio-inline" ms-duplex-number="point_min"/>
                                             &nbsp;--
-                                            <input type="number"  class="radio-inline" ms-duplex-number="point_max"/>
+                                            <input type="number" class="radio-inline" ms-duplex-number="point_max"/>
                                         </label>
                                     </div>
                                     <div class="form-group">
@@ -114,13 +118,16 @@
 
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" ms-duplex-string="sex" class="radio-inline" value="man"/>男&nbsp;
+                                                <input type="radio" ms-duplex-string="sex" class="radio-inline"
+                                                       value="man"/>男&nbsp;
                                             </label>
                                             <label>
-                                                <input type="radio" ms-duplex-string="sex" class="radio-inline" value="female"/>女&nbsp;
+                                                <input type="radio" ms-duplex-string="sex" class="radio-inline"
+                                                       value="female"/>女&nbsp;
                                             </label>
                                             <label>
-                                                <input type="radio" ms-duplex-string="sex" class="radio-inline" value="other"/>其他&nbsp;
+                                                <input type="radio" ms-duplex-string="sex" class="radio-inline"
+                                                       value="other"/>其他&nbsp;
                                             </label>
                                         </div>
 
@@ -129,17 +136,17 @@
                                     <div class="form-group">
 
                                         <label>区域:</label>
-                                        <div id="location"></div>
+
+                                        <div ms-controller="districtCtrl" ms-widget="district,district_1,$opt"></div>
 
                                     </div>
 
+
                                 </div>
+                                <div class="form-group">
+                                    <label>招募条件说明:</label>
 
-
-                            </div>
-                            <div class="form-group">
-                                <label>招募条件说明:</label>
-                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="col-md-10 col-md-offset-1">
                                     <textarea name="condition" rows="5" cols="50" placeholder="请填写您对他的要求，比如：
                                     1、三年以上DOTA2经验
                                     2、话少不BB
@@ -148,15 +155,16 @@
                                     5、颜值高
                                     6、男的
                                     7、不16——28岁之间" ms-duplex="info"></textarea>
-                                </div>
+                                    </div>
 
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <button type="button" class="btn btn-primary" ms-click="saveClick">保存</button>
-                                    <button type="button" class="btn btn-primary" ms-click="releaseClick">发布</button>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <button type="button" class="btn btn-primary" ms-click="saveClick">保存</button>
+                                        <button type="button" class="btn btn-primary" ms-click="releaseClick">发布
+                                        </button>
+                                    </div>
+                                </div>
                         </form>
                     </div>
                 </div>
