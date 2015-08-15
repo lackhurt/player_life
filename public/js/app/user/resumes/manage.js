@@ -46,9 +46,12 @@ define(['avalon', 'bootstrap-dialog-zh', 'app/common/game_picker_dialog'], funct
         },
         
         modifyResumeStatus: function (name, status) {
+            console.log(name + '=-->' + status);
+            var resume_status = status == 1 ? 1 : 2;
             var request = $.restPost('/user/resumes/modify-status', {game: name, resume_status: status});
-            request.done(function(data) {
 
+            request.done(function(data) {
+                console.log(data);
 
             });
         },
@@ -134,7 +137,7 @@ define(['avalon', 'bootstrap-dialog-zh', 'app/common/game_picker_dialog'], funct
 
     function getResumeList() {
         var list = '';
-        var request = $.restPost('/user/resumes/get-resume-list', {
+        var request = $.restGet('/user/resumes/resume-list', {
 
         });
         request.done(function(data) {

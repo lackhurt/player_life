@@ -54,7 +54,7 @@ class ResumesController extends Controller {
     }
 
     //获取用户简历列表
-    public function postGetResumeList() {
+    public function getResumeList() {
         $user = User::find($this->userId);
         return Rest::resolve($user->games);
     }
@@ -73,7 +73,8 @@ class ResumesController extends Controller {
 
     //修改简历状态
     public function postModifyStatus(Request $request, UserResumes $userResumes) {
-        var_dump($request->all());
+        $result = $userResumes->changeResumeStatus($request->all()['game'], $request->all()['resume_status']);
+        return Rest::resolve($result);
     }
 
 

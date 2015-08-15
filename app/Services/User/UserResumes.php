@@ -66,22 +66,20 @@ class UserResumes {
             '$unset' => [
                 'games.'.$game => 1
             ]
-
         ]);
         return $delete;
     }
 
     //修改简历状态
-    public function changeResumeStatus($game) {
-        $update = DB::selectCollection('users')->update([
-            '_id' => new \MongoID($this->_userId),
-        ],[
-//            '$unset' => [
-                'games.'.$game => 1
-//            ]
-
+    public function changeResumeStatus($game, $status) {
+        $result = DB::selectCollection('users')->update([
+            '_id' => new \MongoId($this->_userId)
+        ], [
+            '$set' => [
+                'games.'.$game.'.resume_status' => $status
+            ]
         ]);
+        return $result;
 
-        return $update;
     }
 }
