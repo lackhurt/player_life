@@ -21,11 +21,11 @@ class CorpRecruit {
         $result = false;
         if($request['corpId']){
             $corpId = $request['corpId'];
-            $recruitIndex = array_key_exists('recruitIndex',$request)?$request['recruitIndex']:false;
+            $recruitId = array_key_exists('recruitId',$request)?$request['recruitId']:false;
             unset($request['corpId']);
             $request['user_id'] = $user_id;
-            if($recruitIndex && $recruitIndex != 'false'){
-                $result = $this->updateRecruitData($corpId, $recruitIndex, $request);
+            if($recruitId && $recruitId != 'false'){
+                $result = $this->updateRecruitData($corpId, $recruitId, $request);
             }else{
                 $result = $this->createRecruitData($corpId, $request);
             }
@@ -34,21 +34,21 @@ class CorpRecruit {
         return $result;
     }
 
-    public function deleteRecruit($corpId, $recruitIndex){
+    public function deleteRecruit($corpId, $recruitId){
         $result = DB::selectCollection('corps')->update([
             '_id' => new \MongoId($corpId)
         ], [
             '$pull' =>
-                ['recruit'=>['recruitIndex'=>$recruitIndex]]
+                ['recruit'=>['recruitId'=>$recruitId]]
         ]);
         return $result;
     }
 
-    private function updateRecruitData($corpId,$recruitIndex,$data){
+    private function updateRecruitData($corpId,$recruitId,$data){
         $data['update_at'] = new \MongoDate();
         $result = DB::getMongoDB()->corps->update([
             '_id' => new \MongoId($corpId),
-            'recruit.recruitIndex'=>$recruitIndex
+            'recruit.recruitId'=>$recruitId
         ], [
             '$set' => [
                 'recruit.$' => $data
@@ -60,7 +60,7 @@ class CorpRecruit {
     private function createRecruitData($corpId,$data) {
         $data['update_at'] = new \MongoDate();
         $data['create_at'] = new \MongoDate();
-        $data['recruitIndex'] = uniqid();
+        $data['recruitId'] = (String) new \MongoId();
         $result = DB::getMongoDB()->corps->update([
             '_id' => new \MongoId($corpId)
         ], [
