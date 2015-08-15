@@ -46,32 +46,42 @@ class UserResumes {
 
     //保存简历信息
     public function createResume(Array $data) {
-
-        $result = \DB::collection('users')->update([
+        $data['created_at'] = $data['updated_at'] = new \MongoDate();
+        $result = DB::selectCollection('users')->update([
             '_id' => new \MongoId($this->_userId)
         ], [
-                '$pull' => [
-                    'games' => [
-                        [$data['game']] => [
-                            'title' => $data['title'],
-                            'platform' => $data['platform'],
-                            'network_provider' => $data['network_provider'],
-                        ]
-                    ]
+                '$set' => [
+                    'games.'.$data['game'] => $data
                 ]
 
         ]);
-
         return $result;
     }
 
-    //获取简历列表
-    public function getResumesList() {
+    //删除单个简历
+    public function deleteResume($game) {
+        $delete = DB::selectCollection('users')->update([
+            '_id' => new \MongoID($this->_userId),
+        ],[
+            '$unset' => [
+                'games.'.$game => 1
+            ]
 
+        ]);
+        return $delete;
     }
 
     //修改简历状态
-    public function changeResumeStatus() {
+    public function changeResumeStatus($game) {
+        $update = DB::selectCollection('users')->update([
+            '_id' => new \MongoID($this->_userId),
+        ],[
+//            '$unset' => [
+                'games.'.$game => 1
+//            ]
 
+        ]);
+
+        return $update;
     }
 }
