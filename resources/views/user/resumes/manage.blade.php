@@ -52,10 +52,10 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true"   aria-expanded="false">
-                        开放 <span class="caret"></span>
+                        {%$val.resume_status == 1 ? '开放' : '关闭'%} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a ms-on-click="modifyResumeStatus($val.game, $val.resume_status)">{{$val['resume_status'] == 1 ? '/images/avatar_default.jpg' : $member['avatar']}}关闭</a></li>
+                        <li><a ms-on-click="modifyResumeStatus($val.game, $val.resume_status)">{%$val.resume_status == 1 ? '关闭' : '开放'%}</a></li>
                     </ul>
                 </div>
             </td>

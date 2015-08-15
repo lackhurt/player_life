@@ -36,7 +36,6 @@ class ResumesController extends Controller {
 
     public function getManage() {
         $user = User::find($this->userId);
-//        var_dump($user);die;
         return view('user.resumes.manage')->with([
             'title' => '简历管理',
             'user' => $user
@@ -69,13 +68,12 @@ class ResumesController extends Controller {
     //删除单个简历信息
     public function postDeleteResume(Request $request, UserResumes $userResumes) {
         $delete = $userResumes->deleteResume($request->all()['game']);
-//        var_dump($request->all());die;
         return Rest::resolve($request->all()['game']);
     }
 
     //修改简历状态
     public function postModifyStatus(Request $request, UserResumes $userResumes) {
-
+        var_dump($request->all());
     }
 
 
