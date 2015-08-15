@@ -46,13 +46,12 @@ define(['avalon', 'bootstrap-dialog-zh', 'app/common/game_picker_dialog'], funct
         },
         
         modifyResumeStatus: function (name, status) {
-            console.log(name + '=-->' + status);
-            var resume_status = status == 1 ? 1 : 2;
-            var request = $.restPost('/user/resumes/modify-status', {game: name, resume_status: status});
+            var resume_status = status == 1 ? 2 : 1;
+            console.log(name + '=-->' + resume_status);
+            var request = $.restPost('/user/resumes/modify-status', {game: name, resume_status: resume_status});
 
             request.done(function(data) {
-                console.log(data);
-
+                getResumeList();
             });
         },
 
