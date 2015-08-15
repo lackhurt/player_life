@@ -21,11 +21,12 @@ class ResumesController extends Controller {
      * @param Guard $auth
      * @param Registrar $registrar
      */
+    public $userId = '';
 
-
-    public function __construct(Guard $auth, Registrar $registrar)
+    public function __construct(Guard $guard, Registrar $registrar)
     {
-        $this->guard = $auth;
+        $this->guard = $guard;
+        $this->userId = Session::get($guard->getName());
     }
 
     /**
@@ -33,15 +34,14 @@ class ResumesController extends Controller {
      * @return $this
      */
 
-    public function getManage(Guard $guard) {
-        $user = User::find(Session::get($guard->getName()));
-//        var_dump($user);die;
+    public function getManage() {
+        $user = User::find($this->userId);
         return view('user.resumes.manage')->with([
             'title' => '简历管理',
             'user' => $user
         ]);
     }
-
+    //保存用户简历
     public function postCreate(Request $request, UserResumes $userResumes) {
         $validator = $userResumes->validatorResume($request->all());
         if($validator->fails()) {
@@ -49,10 +49,32 @@ class ResumesController extends Controller {
                 $request, $validator
             );
         }
-
         $createResume = $userResumes->createResume($request->all());
-        return $createResume;
-//        return Rest::reject($createResume);
+        return Rest::resolve($createResume);
+    }
+
+    //获取用户简历列表
+    public function getResumeList() {
+        $user = User::find($this->userId);
+        return Rest::resolve($user->games);
+    }
+
+    //获取单个简历信息
+    public function postUpdate(Request $request) {
+        $user = User::distinct()->get(['games.'.$request->all()['game']]);
+        return Rest::resolve($user);
+    }
+
+    //删除单个简历信息
+    public function postDeleteResume(Request $request, UserResumes $userResumes) {
+        $delete = $userResumes->deleteResume($request->all()['game']);
+        return Rest::resolve($request->all()['game']);
+    }
+
+    //修改简历状态
+    public function postModifyStatus(Request $request, UserResumes $userResumes) {
+        $result = $userResumes->changeResumeStatus($request->all()['game'], $request->all()['resume_status']);
+        return Rest::resolve($result);
     }
 
 
