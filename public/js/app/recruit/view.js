@@ -1,11 +1,15 @@
 /**
- * Created by Administrator on 2015/7/4 0004.
+ * 招募预览页面
  */
-define(['react', 'app/common/avalon_widget/district','bootstrap-dialog-zh','avalon'],function( React, district, dialog){
+define(['avalon'],function(){
     var infoCtrl = avalon.define({
         $id:'infoCtrl',
         info:{},
         show:false,
+        clickClose:function(){
+
+            window.close();
+        }
     })
     avalon.scan(document.body);
 

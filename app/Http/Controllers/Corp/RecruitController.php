@@ -53,6 +53,16 @@ class RecruitController extends Controller {
         ]);
     }
 
+    public function getLocalView(Corp $corp) {
+        $corp_id = $this->request->get('cid');
+        return view('recruit/view')->with([
+            'title' => '招募预览',
+            'corp' => $corp->getCorpInfo($corp_id),
+            'corp_id' => $corp_id,
+            'recruitInfo' => '{}'
+        ]);
+    }
+
 
 //获取招募列表
     public function postRecruitList() {

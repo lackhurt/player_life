@@ -82,8 +82,10 @@
                                 </div>
                                 <br>
                                 <div class="form-group">
-                                    <button>管理</button>
-                                    <button>投递简历</button>
+                                    <button type="button" class="btn btn-primary">管理</button>
+                                    <button type="button" class="btn btn-primary">投递简历</button>
+                                    <button type="button" class="btn btn-primary" ms-click="clickClose">关闭</button>
+
                                 </div>
 
                             </div>
@@ -99,8 +101,11 @@
     </div>
     <script>
 
-            require(['app/recruit/view'], function (action) {
-            action.setInfo({!! $recruitInfo !!});
+        require(['app/recruit/view'], function (action) {
+            var recruitInfo = JSON.parse(sessionStorage.getItem('recruitInfo'))
+            if(recruitInfo){
+                action.setInfo(recruitInfo);
+            }
         });
     </script>
 @endsection

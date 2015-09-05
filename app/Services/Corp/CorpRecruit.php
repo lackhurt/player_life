@@ -74,6 +74,7 @@ class CorpRecruit
                 'recruit.$' => $data
             ]
         ]);
+        $result['recruit_id'] = $recruit_id;
         return $result;
     }
 
@@ -89,6 +90,7 @@ class CorpRecruit
                 'recruit' => $data
             ]
         ]);
+        $result['recruit_id'] = $data['recruit_id'];
         return $result;
     }
 

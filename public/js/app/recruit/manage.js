@@ -14,10 +14,17 @@ define(['react',
             putDistrictInfoIntoForm();
             var data = getFormData(formCtrl);
             delete data.roleCheckBoxList;
-            saveInfo(data);
+            saveInfo(data,function(recruit_id){
+                formCtrl.recruit_id = recruit_id;
+                dialog.alert('保存成功');
+            });
         },
-        releaseClick: function () {
-
+        localView: function(){
+            putDistrictInfoIntoForm();
+            var data = getFormData(formCtrl);
+            delete data.roleCheckBoxList;
+            sessionStorage.setItem('recruitInfo',JSON.stringify(data));
+            window.open('/corp/recruit/local-view?cid=' + formCtrl.corp_id);
         }
     })
     var recruitListCtrl = avalon.define({
@@ -121,6 +128,7 @@ define(['react',
         })
     }
 
+
     function getFormData(vm) {
         var model = vm.$model;
         var result = JSON.stringify(model);
@@ -137,9 +145,10 @@ define(['react',
         })
     }
 
-    function saveInfo(data) {
+    function saveInfo(data,callUpdateRecruitId) {
         var request = $.restPost('/corp/recruit/create-recruit', data)
         request.done(function (response) {
+            callUpdateRecruitId(response.recruit_id);
             getRecruitList();
         })
     }
