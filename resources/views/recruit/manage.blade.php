@@ -36,10 +36,10 @@
                                 </div>
                                 <div class="col-md-4">
                                     <a class="btn btn-default" role="button" ms-click="edit($index)">修改</a>
-                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruitIndex)">显示</a>
-                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruitIndex)">关闭</a>
+                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruitId)">显示</a>
+                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruitId)">关闭</a>
                                     <a class="btn btn-default" role="button"
-                                       ms-click="del(el.recruitIndex,$remove)">删除</a>
+                                       ms-click="del(el.recruitId,$remove)">删除</a>
                                 </div>
                             </td>
                         </tr>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="row">
                         <form id="infoForm">
-                            <input type="hidden" name="recruitIndex" ms-attr-value=""/>
+                            <input type="hidden" name="recruitId" ms-attr-value=""/>
 
                             <div class="form-group">
                                 <label>招募标签:</label>
@@ -165,6 +165,7 @@
                                         </button>
                                     </div>
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -176,7 +177,7 @@
 
     <script>
 
-        require(['app/corp/recruit'], function (action) {
+        require(['app/recruit/manage'], function (action) {
             action.setCorpId('{{$corpId}}');
             action.init();
         });

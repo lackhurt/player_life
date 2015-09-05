@@ -19,14 +19,15 @@ define(['react', 'app/common/avalon_widget/district','bootstrap-dialog-zh','aval
         $id:'recruitListCtrl',
         list:[],
         edit:function(index){
-            setFormData(formCtrl,recruitListCtrl.list[index]);
+            setFormData(formCtrl,inrecruitListCtrl.list[dex]);
             avalon.vmodels.district_1.setDistrict(formCtrl.province_id, formCtrl.city_id);
             pageCtrl.isFormShow = true;
         },
-        del:function(index , remove){
+        del:function(recruitId , remove){
+
             dialog.confirm('确认删除招募？',function(result){
                 if(result){
-                    deleteRecruit(index)
+                    deleteRecruit(recruitId)
                     remove()
                 }
             })
@@ -37,7 +38,7 @@ define(['react', 'app/common/avalon_widget/district','bootstrap-dialog-zh','aval
             avalon.vmodels.district_1.setDistrict(formCtrl.province_id, formCtrl.city_id);
             pageCtrl.isFormShow = true;
         },
-        toggle:function(recruitIndex){
+        toggle:function(recruitId){
 
         }
     })
@@ -55,7 +56,7 @@ define(['react', 'app/common/avalon_widget/district','bootstrap-dialog-zh','aval
         $id:'formCtrl',
         roleCheckBoxList:[],
         corpId:'',
-        recruitIndex:'',
+        recruitId:'',
         tag:'',
         title:'',
         is_show:'on',
@@ -87,7 +88,7 @@ define(['react', 'app/common/avalon_widget/district','bootstrap-dialog-zh','aval
     var defaultFormData = {
         tag:'',
         title:'',
-        recruitIndex:false,
+        recruitId:false,
         is_show:'on',
         other_role_tag:'',
         role_checked_list:[],
@@ -132,9 +133,8 @@ define(['react', 'app/common/avalon_widget/district','bootstrap-dialog-zh','aval
         })
     }
 
-    function deleteRecruit(index){
-        console.log(index)
-        var data = {corpId:formCtrl.corpId,recruitIndex:index};
+    function deleteRecruit(recruitId){
+        var data = {corpId:formCtrl.corpId,recruitId:recruitId};
         var request = $.restPost('/corp/recruit/delete-recruit',data);
         request.done(function(data){
             avalon.log(data);
