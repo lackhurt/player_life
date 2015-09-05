@@ -16,6 +16,7 @@ requirejs.config({
         bootstrap: 'lib/bootstrap/3.3.4/bootstrap',
         'bootstrap-datetimepicker': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.min',
         'bootstrap-datetimepicker-cn': 'lib/bootstrap/plugins/datetimepicker/bootstrap-datetimepicker.zh-CN',
+        'bootstrap-switch': 'lib/bootstrap/plugins/switch/bootstrap-switch',
         'bootstrap-dialog-zh': 'lib/bootstrap/plugins/dialog/i18n_zh',
         'bootstrap-dialog': 'lib/bootstrap/plugins/dialog/bootstrap-dialog',
         plupload: 'lib/plupload/2.1.4/plupload.full.min',
@@ -31,6 +32,10 @@ requirejs.config({
         'bootstrap-datetimepicker-cn': {
             deps: ['bootstrap-datetimepicker'],
             exports: '$'
+        },
+        'bootstrap-switch':{
+            deps:['jquery','css!/style/lib/bootstrap/bootstrap-switch.css'],
+            exports:'$'
         },
         'bootstrap': {
             deps: ['jquery', 'css!/style/lib/bootstrap/bootstrap.css'],
