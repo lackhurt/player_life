@@ -1,13 +1,14 @@
 var index = 0;
 define(['avalon', 'bootstrap-dialog-zh', 'app/common/game_picker_dialog'], function(avalon, dialog, gamePickerDialog) {
-    var resumesCtrl = avalon.define({
+    var resumesCtrl;
+    resumesCtrl = avalon.define({
         $id: 'resumesCtrl',
         page: 1,
         pageNum: 3,
         pageCount: 0,
         listCount: 0,
         list: [],
-        resumeList : {},
+        resumeList: {},
         title: '',
         formData: {
             'game': '',
@@ -25,59 +26,82 @@ define(['avalon', 'bootstrap-dialog-zh', 'app/common/game_picker_dialog'], funct
             'privacy_setting': ''
         },
 
+        previewResume: function (gameName) {
+            var storage = window.localStorage;
+            if(typeof(gameName) == 'string') {
+                var request = $.restPost('/user/resumes/update', {game: gameName});
+                request.done(function (data) {
+                    storage.setItem('previewResume', JSON.stringify(data[0]));
+                });
+            } else if(typeof(gameName) == 'object') {
+                var isValid = 1;
+                $.each(formCtrl.$model, function(i, v) {
+                    if(v == '') {
+                        dialog.alert('请填写完整信息');
+                        isValid = 2;
+                        return false;
+                    }
+                });
+                if(isValid == 2) {
+                    return false;
+                }
+                storage.setItem('previewResume', JSON.stringify(formCtrl.$model));
+            }
+            window.open('/user/resumes/preview');
 
-        resumesSubmit: function() {
+
+        },
+
+        resumesSubmit: function () {
             submit();
         },
 
-        resumesList: function() {
+        resumesList: function () {
 
             getResumeList(1, 6);
 
         },
 
-        updateResume: function(name) {
-            window.location="#resume-head";
+        updateResume: function (name) {
+            window.location = "#resume-head";
             var request = $.restPost('/user/resumes/update', {game: name});
-            request.done(function(data) {
+            request.done(function (data) {
                 setFormData(formCtrl, data[0]);
-                location='#';
+                location = '#';
             });
         },
-        
+
         modifyResumeStatus: function (name, status) {
-            console.log(name + '=-->' + status);
-            var resume_status = status == 1 ? 1 : 2;
-            var request = $.restPost('/user/resumes/modify-status', {game: name, resume_status: status});
-
-            request.done(function(data) {
-                console.log(data);
-
+            var resume_status = status == 1 ? 2 : 1;
+            var request = $.restPost('/user/resumes/modify-status', {game: name, resume_status: resume_status});
+            request.done(function (data) {
+                getResumeList();
             });
         },
 
-        deleteResume: function(game) {
+        deleteResume: function (game) {
             dialog.confirm({
                 title: '温馨提示',
                 message: '确认要删除' + game + '的简历么',
-                callback: function(result) {
-                    if(result) {
+                callback: function (result) {
+                    if (result) {
                         var request = $.restPost('/user/resumes/delete-resume', {game: game});
 
-                        request.done(function(data) {
+                        request.done(function (data) {
                             getResumeList();
-                            location='#';
+                            location = '#';
                         })
 
                     } else {
 
-                    }}
+                    }
+                }
             });
         },
 
-        getIndex: function() {
-            if(index < resumesCtrl.listCount) {
-                return index ++;
+        getIndex: function () {
+            if (index < resumesCtrl.listCount) {
+                return index++;
             } else {
                 return index;
             }
@@ -104,6 +128,7 @@ define(['avalon', 'bootstrap-dialog-zh', 'app/common/game_picker_dialog'], funct
 
     avalon.scan(document.body);
     resumesCtrl.list = [
+        {test: '', name: '请选择'},
         {test: 1, name: '1年'},
         {test: 2, name: '2年'},
         {test: 3, name: '3年'},

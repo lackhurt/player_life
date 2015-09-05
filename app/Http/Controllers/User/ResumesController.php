@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Routing\Registrar;
 use App\User;
 use Illuminate\Support\Facades\Blade;
+use DB;
 
 class ResumesController extends Controller {
 
@@ -67,7 +68,7 @@ class ResumesController extends Controller {
 
     //删除单个简历信息
     public function postDeleteResume(Request $request, UserResumes $userResumes) {
-        $delete = $userResumes->deleteResume($request->all()['game']);
+        $userResumes->deleteResume($request->all()['game']);
         return Rest::resolve($request->all()['game']);
     }
 
@@ -76,6 +77,17 @@ class ResumesController extends Controller {
         $result = $userResumes->changeResumeStatus($request->all()['game'], $request->all()['resume_status']);
         return Rest::resolve($result);
     }
+
+    //简历预览页面
+    public function getPreview() {
+        $user = User::find($this->userId);
+        return view('user.resumes.preview')->with([
+            'title' => '简历预览',
+            'user' => $user,
+        ]);
+    }
+
+
 
 
 }
