@@ -121,7 +121,7 @@ class ResumesController extends Controller {
                 return Rect::reject('投递失败');
             }
         } else {
-            return Rest::reject("没有$game的简历");
+            return Rest::reject('没有游戏:' . $params['game'] . '的简历');
         }
     }
 }
