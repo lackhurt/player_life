@@ -38,7 +38,7 @@
                     {{$recruit['sex']}}
                 </td>
                 <td>
-                    <button class="js_send_resume btn btn-primary" data-game="暗黑破坏神" data-recruit-id="{{$recruit['recruit_id']}}" data-corp-id="{{$corp['_id']}}">投递简历</button>
+                    <button class="js_deliver_resume btn btn-primary" data-game="暗黑破坏神" data-recruit-id="{{$recruit['recruit_id']}}" data-corp-id="{{$corp['_id']}}">投递简历</button>
                 </td>
             </tr>
             @endforeach
