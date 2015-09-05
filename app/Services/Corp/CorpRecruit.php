@@ -8,47 +8,67 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PhpSpec\Exception\Exception;
 
-class CorpRecruit {
+class CorpRecruit
+{
 
 
-    public function getRecruitList($corpId){
-        $corp = Corp::find($corpId);
-        $result = json_decode(json_encode($corp),true);
-        return array_key_exists('recruit',$result)?$result['recruit']:[];
+    public function getRecruitList($corp_id)
+    {
+        $corp = Corp::find($corp_id);
+        $result = json_decode(json_encode($corp), true);
+        return array_key_exists('recruit', $result) ? $result['recruit'] : [];
     }
 
-    public function createRecruit($request,$user_id) {
+    public function getSingleRecruit($corp_id, $recruit_id)
+    {
+        $list = DB::selectCollection('corps')->findOne(
+            ['_id' => new \MongoId($corp_id)],
+            ['recruit' => [
+                '$elemMatch' => ['recruit_id' => $recruit_id]
+                ]
+            ]
+        );
+
+        $result = json_decode(json_encode($list), true);
+
+        return $result['recruit'][0];
+    }
+
+    public function createRecruit($request, $user_id)
+    {
         $result = false;
-        if($request['corpId']){
-            $corpId = $request['corpId'];
-            $recruitId = array_key_exists('recruitId',$request)?$request['recruitId']:false;
-            unset($request['corpId']);
+        if ($request['corp_id']) {
+            $corp_id = $request['corp_id'];
+            $recruit_id = array_key_exists('recruit_id', $request) ? $request['recruit_id'] : false;
+            unset($request['corp_id']);
             $request['user_id'] = $user_id;
-            if($recruitId && $recruitId != 'false'){
-                $result = $this->updateRecruitData($corpId, $recruitId, $request);
-            }else{
-                $result = $this->createRecruitData($corpId, $request);
+            if ($recruit_id && $recruit_id != 'false') {
+                $result = $this->updateRecruitData($corp_id, $recruit_id, $request);
+            } else {
+                $result = $this->createRecruitData($corp_id, $request);
             }
 
         }
         return $result;
     }
 
-    public function deleteRecruit($corpId, $recruitId){
+    public function deleteRecruit($corp_id, $recruit_id)
+    {
         $result = DB::selectCollection('corps')->update([
-            '_id' => new \MongoId($corpId)
+            '_id' => new \MongoId($corp_id)
         ], [
             '$pull' =>
-                ['recruit'=>['recruitId'=>$recruitId]]
+                ['recruit' => ['recruit_id' => $recruit_id]]
         ]);
         return $result;
     }
 
-    private function updateRecruitData($corpId,$recruitId,$data){
+    private function updateRecruitData($corp_id, $recruit_id, $data)
+    {
         $data['update_at'] = new \MongoDate();
         $result = DB::getMongoDB()->corps->update([
-            '_id' => new \MongoId($corpId),
-            'recruit.recruitId'=>$recruitId
+            '_id' => new \MongoId($corp_id),
+            'recruit.recruit_id' => $recruit_id
         ], [
             '$set' => [
                 'recruit.$' => $data
@@ -57,12 +77,13 @@ class CorpRecruit {
         return $result;
     }
 
-    private function createRecruitData($corpId,$data) {
+    private function createRecruitData($corp_id, $data)
+    {
         $data['update_at'] = new \MongoDate();
         $data['create_at'] = new \MongoDate();
-        $data['recruitId'] = (String) new \MongoId();
+        $data['recruit_id'] = (String)new \MongoId();
         $result = DB::getMongoDB()->corps->update([
-            '_id' => new \MongoId($corpId)
+            '_id' => new \MongoId($corp_id)
         ], [
             '$push' => [
                 'recruit' => $data
@@ -72,8 +93,8 @@ class CorpRecruit {
     }
 
 
-
-    public function validatorCreateRecruit(array $data) {
+    public function validatorCreateRecruit(array $data)
+    {
         $rules = [
 //            "phone" => ['required', 'numeric', 'regex: /^(\+86)?((13[0-9])|(15[0-9])|(17[08])|(18[0-9]))\d{8}$/'],
 //            "password" => 'required|confirmed',
@@ -97,7 +118,8 @@ class CorpRecruit {
 
     }
 
-    public function validatorUpdateRecruit(array $data) {
+    public function validatorUpdateRecruit(array $data)
+    {
         $rules = [
 //            "phone" => ['required', 'numeric', 'regex: /^(\+86)?((13[0-9])|(15[0-9])|(17[08])|(18[0-9]))\d{8}$/'],
 //            "password" => 'required|confirmed',
@@ -121,7 +143,8 @@ class CorpRecruit {
 
     }
 
-    public function validatorDeleteRecruit(array $data) {
+    public function validatorDeleteRecruit(array $data)
+    {
         $rules = [
 //            "phone" => ['required', 'numeric', 'regex: /^(\+86)?((13[0-9])|(15[0-9])|(17[08])|(18[0-9]))\d{8}$/'],
 //            "password" => 'required|confirmed',
@@ -144,7 +167,6 @@ class CorpRecruit {
         return Validator::make($data, $rules, $messages);
 
     }
-
 
 
 }

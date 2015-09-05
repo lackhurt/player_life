@@ -32,14 +32,16 @@
                             </td>
                             <td class="col-md-8">
                                 <div class="col-md-8">
-                                    {%el.title%}
+                                    {%el.title%}:{%el.recruitId%}
                                 </div>
                                 <div class="col-md-4">
                                     <a class="btn btn-default" role="button" ms-click="edit($index)">修改</a>
                                     <a class="btn btn-default" role="button" ms-click="toggle(el.recruitId)">显示</a>
                                     <a class="btn btn-default" role="button" ms-click="toggle(el.recruitId)">关闭</a>
-                                    <a class="btn btn-default" role="button"
-                                       ms-click="del(el.recruitId,$remove)">删除</a>
+                                    <a class="btn btn-default" role="button" ms-click="view(el.recruitId)">预览</a>
+
+                                    <a class="btn btn-default" role="button"  ms-click="del(el.recruitId,$remove)">删除</a>
+                                    <input type="checkbox"  checked>
                                 </div>
                             </td>
                         </tr>
@@ -178,7 +180,7 @@
     <script>
 
         require(['app/recruit/manage'], function (action) {
-            action.setCorpId('{{$corpId}}');
+            action.setCorpId('{{$corp_id}}');
             action.init();
         });
     </script>
