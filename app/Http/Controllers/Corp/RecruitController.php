@@ -35,26 +35,29 @@ class RecruitController extends Controller {
         return view('recruit/manage')->with([
             'title' => '战队信息',
             'corp' => $corp->getCorpInfo($id),
-            'corpId' => $id,
+            'corp_id' => $id,
         ]);
 
     }
 
-    public function getView(Corp $corp) {
-        $corpId = $this->request->get('cid');
-        $recruitId = $this->request->get('rid');
+    public function getView(CorpRecruit $corpRecruit, Corp $corp) {
+        $corp_id = $this->request->get('cid');
+        $recruit_id = $this->request->get('rid');
+        $recruitInfo = json_encode($corpRecruit->getSingleRecruit($corp_id,$recruit_id));
         return view('recruit/view')->with([
             'title' => '招募信息',
-            'corp' => $corp->getCorpInfo($corpId),
-            'corpId' => $corpId,
-            'recruitId' => $recruitId
+            'corp' => $corp->getCorpInfo($corp_id),
+            'corp_id' => $corp_id,
+            'recruit_id' => $recruit_id,
+            'recruitInfo' => $recruitInfo
         ]);
     }
+
 
 //获取招募列表
     public function postRecruitList() {
 
-        $result = $this->service->getRecruitList($this->request->get('corpId'));
+        $result = $this->service->getRecruitList($this->request->get('corp_id'));
         if(is_array($result)){
             return Rest::resolve($result);
         }else{
@@ -103,7 +106,7 @@ class RecruitController extends Controller {
                 $this->request, $validator
             );
         }
-        $result = $this->service->deleteRecruit(Input::get('corpId'), Input::get('recruitId'));
+        $result = $this->service->deleteRecruit(Input::get('corp_id'), Input::get('recruit_id'));
         return $result;
     }
 

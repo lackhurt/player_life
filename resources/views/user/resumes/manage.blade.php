@@ -52,10 +52,10 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true"   aria-expanded="false">
-                        {%$val.resume_status == 1 ? '开放' : '关闭'%}{%$val.resume_status%} <span class="caret"></span>
+                        {%$val.resume_status == 1 ? '开放' : '关闭'%}<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a ms-on-click="modifyResumeStatus($val.game, $val.resume_status)">{%$val.resume_status == 1 ? '关闭' : '开放'%}{%$val.resume_status%}</a></li>
+                        <li><a ms-on-click="modifyResumeStatus($val.game, $val.resume_status)">{%$val.resume_status == 1 ? '关闭' : '开放'%}</a></li>
                     </ul>
                 </div>
             </td>
@@ -246,7 +246,7 @@
                 <button type="button" class="btn btn-default" ms-on-click="resumesSubmit()">保存设置</button>
             </div>
             <div class="col-xs-4">
-                <button type="button" class="btn btn-default">预览简历</button>
+                <button type="button" ms-on-click="previewResume()" class="btn btn-default">预览简历</button>
             </div>
         </div>
     </form>
