@@ -85,7 +85,7 @@
                         </tbody>
                     </table>
                     <p>
-                        <button class="center-block btn btn-lg btn-primary">招募队员</button>
+                        <a href="/corp/recruit?id={{$corp['_id']}}" class="btn btn-primary btn-lg active" role="button">招募队员</a>
                     </p>
                 </div>
             </div>

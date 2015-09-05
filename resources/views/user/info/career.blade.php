@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label">游戏年龄</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="years" ms-duplex-string="formData.years">
+                        <input type="number" class="form-control" name="years" ms-duplex-string="formData.years">
                     </div>
                 </div>
 
@@ -48,15 +48,13 @@
                                             <span class="pull-right">
                                                 玩过
                                                 <select class="pull-right" ms-duplex="el.experience">
-                                                    <option value="1">1天</option>
-                                                    <option value="2">2天</option>
-                                                    <option value="3">3天</option>
-                                                    <option value="4">4天</option>
-                                                    <option value="5">5天</option>
-                                                    <option value="6">6天</option>
-                                                    <option value="7">7天</option>
-                                                    <option value="8">8天</option>
-                                                    <option value="9">9天</option>
+                                                    <option value="1m">1月</option>
+                                                    <option value="6m">2-6月</option>
+                                                    <option value="1y">6-12月</option>
+                                                    <option value="2y">1-2年</option>
+                                                    <option value="3y">2-3年</option>
+                                                    <option value="6y">3-6年</option>
+                                                    <option value="7y+">7年以上</option>
                                                 </select>
                                             </span>
                                         </label>
@@ -81,7 +79,7 @@
                                             <label>
                                                 <input type="radio" ms-duplex-string="playBest" ms-attr-value="el.name">
                                                 {%el.name%}
-                                                <span ms-visible="el.experience" class="badge">玩过{%el.experience%}天</span>
+                                                <span ms-visible="el.experience" class="badge">玩过{%el.experience%}</span>
                                             </label>
                                         </div>
                                     </li>

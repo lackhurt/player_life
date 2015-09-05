@@ -3,21 +3,21 @@ define(['avalon', 'text!./page_bar.html'], function(avalon, tpl) {
 
         var options = data.pageBarOptions;
 
-        var model = avalon.define('pageBar', function(vm) {
+        var model = avalon.define(data.pageBarId, function(vm) {
             avalon.mix(vm, {
                 start: 0,
                 limit: 5,
                 total: 10,
                 pages: [],
                 maxPagesForView: 6,
-                current: 1,
-                setPage: function(pageNumber) {
-                    if (pageNumber >= 1 && Math.ceil(pageNumber <= vm.total / vm.limit)) {
+                current: 1
+            }, options);
 
-                        vm.start = (pageNumber - 1) * vm.limit;
-                    }
+            vm.setPage = function(pageNumber) {
+                if (pageNumber >= 1 && Math.ceil(pageNumber <= vm.total / vm.limit)) {
+                    vm.start = (pageNumber - 1) * vm.limit;
                 }
-            });
+            };
 
             vm.$init = function() {
                 element.innerHTML = tpl;
@@ -30,6 +30,8 @@ define(['avalon', 'text!./page_bar.html'], function(avalon, tpl) {
                 vm.total = options.total;
                 vm.start = options.start;
                 vm.limit = options.limit;
+
+                processPages();
 
                 function processPages() {
                     var pagesLength = Math.ceil(vm.total / vm.limit);
@@ -68,8 +70,7 @@ define(['avalon', 'text!./page_bar.html'], function(avalon, tpl) {
     };
 
     widget.defauls = {
-        limit: 5,
-        start: 0
+
     };
 
     return avalon;

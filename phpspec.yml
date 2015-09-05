@@ -3,3 +3,10 @@ suites:
         namespace: App
         psr4_prefix: App
         src_path: app
+
+extensions:
+    - PhpSpec\Laravel\Extension\LaravelExtension
+
+laravel_extension:
+    testing_environment: 'local'
+    framework_path: '../bootstrap/app.php'

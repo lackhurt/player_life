@@ -1,7 +1,7 @@
 <nav>
     <ul class="pagination">
         <li ms-class="disabled: current <= 1">
-            <a href="#" aria-label="Previous" ms-on-click="setPage(current - 1)">
+            <a href="javascript:;" aria-label="Previous" ms-on-click="setPage(current - 1)">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
@@ -10,7 +10,7 @@
             <span ms-if="el === 'sp'">...</span>
         </li>
         <li ms-class="disabled: current >= Math.ceil(total / limit)">
-            <a href="#" aria-label="Next" ms-on-click="setPage(current + 1)">
+            <a href="javascript:;" aria-label="Next" ms-on-click="setPage(current + 1)">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

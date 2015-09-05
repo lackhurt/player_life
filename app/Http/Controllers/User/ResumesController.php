@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 
 
 use App\lib\Rest\Rest;
+use App\Services\Resume\ResumeDeliverService;
 use App\Services\User\UserResumes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -56,7 +57,18 @@ class ResumesController extends Controller {
     //获取用户简历列表
     public function getResumeList() {
         $user = User::find($this->userId);
-        return Rest::resolve($user->games);
+
+        if (\Request::exists('game')) {
+            $game = \Request::get('game');
+            if (isset($user->games->$game)) {
+                return Rest::resolve($user->games[\Request::get('game')]);
+            } else {
+                return Rest::resolve([]);
+            }
+        } else {
+
+            return Rest::resolve($user->games);
+        }
     }
 
     //获取单个简历信息
@@ -78,4 +90,20 @@ class ResumesController extends Controller {
     }
 
 
+    public function getDeliver(Request $request, ResumeDeliverService $resumeDeliverService, Guard $guard) {
+
+        $params = $request->all();
+
+        $resume = $resumeDeliverService->getResume(Session::get($guard->getName()), $params['game']);
+
+        if ($resume !== null) {
+            if ($resumeDeliverService->deliver($resume, $params['recruitId'], $params['corpId'], Session::get($guard->getName()))) {
+                return Rest::resolve([]);
+            } else {
+                return Rect::reject('投递失败');
+            }
+        } else {
+            Rest::reject("没有$game的简历");
+        }
+    }
 }
