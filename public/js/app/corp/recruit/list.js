@@ -18,10 +18,14 @@ define(['bootstrap', 'text!./list_send_resume.html', 'bootstrap-dialog-zh'], fun
                 label: '确认投递',
                 cssClass: 'btn-primary',
                 action: function(win) {
-                    $.restPost('/user/resumes/send', {
+                    $.restPost('/user/resumes/deliver', {
                         corpId: corpId,
                         recruitId: recruitId,
                         game: game
+                    }).done(function() {
+                        dialog.alert('简历已投递');
+                    }).fail(function(msg) {
+                        dialog.alert(msg || '投递失败');
                     });
                     win.close();
                 }
@@ -35,7 +39,7 @@ define(['bootstrap', 'text!./list_send_resume.html', 'bootstrap-dialog-zh'], fun
 
         request.done(function(data) {
             if (data) {
-                win.setMessage('简历: <a href="/user/resumes/manage">' + data[game].title + '</a>');
+                win.setMessage('简历: <a href="/user/resumes/manage">' + data.title + '</a>');
             }
         });
 

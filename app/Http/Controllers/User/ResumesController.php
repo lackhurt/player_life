@@ -61,10 +61,10 @@ class ResumesController extends Controller {
 
         if (\Request::exists('game')) {
             $game = \Request::get('game');
-            if (isset($user->games->$game)) {
-                return Rest::resolve($user->games[\Request::get('game')]);
+            if (array_key_exists($game, $user->games)) {
+                return Rest::resolve($user->games[$game]);
             } else {
-                return Rest::resolve([]);
+                return Rest::reject('没有游戏: ' . $game . '的简历');
             }
         } else {
 
@@ -102,20 +102,26 @@ class ResumesController extends Controller {
 
 
 
-    public function getDeliver(Request $request, ResumeDeliverService $resumeDeliverService, Guard $guard) {
+    public function postDeliver(Request $request, ResumeDeliverService $resumeDeliverService, Guard $guard) {
 
         $params = $request->all();
+
+        $userId = Session::get($guard->getName());
+
+        if ($resumeDeliverService->isDelivered($params['corpId'], $userId)) {
+            return Rest::reject('简历已经投递了');
+        }
 
         $resume = $resumeDeliverService->getResume(Session::get($guard->getName()), $params['game']);
 
         if ($resume !== null) {
-            if ($resumeDeliverService->deliver($resume, $params['recruitId'], $params['corpId'], Session::get($guard->getName()))) {
+            if ($resumeDeliverService->deliver($resume, $params['recruitId'], $params['corpId'], $userId)) {
                 return Rest::resolve([]);
             } else {
                 return Rect::reject('投递失败');
             }
         } else {
-            Rest::reject("没有$game的简历");
+            return Rest::reject("没有$game的简历");
         }
     }
 }

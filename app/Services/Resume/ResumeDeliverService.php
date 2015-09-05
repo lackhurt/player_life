@@ -9,10 +9,6 @@ class ResumeDeliverService
 
     public function deliver(Array $resume, $recruitId, $corpId, $userId) {
 
-        if ($this->isDelivered($corpId, $userId)) {
-            throw new \Exception('简历已经投递了');
-        }
-
         return \DB::selectCollection('corps')->update([
             '_id' => new \MongoId($corpId),
             'recruit' => [
