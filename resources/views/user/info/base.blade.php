@@ -62,7 +62,7 @@
                     <div id="bornDisctrict">
                     </div>
                 </div>
-                <div class="form-group" ms-controller="locationAddress">
+                <div class="form-group">
                     <label class="col-md-4 control-label">所在地</label>
                     <div id="location"></div>
                 </div>

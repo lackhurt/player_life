@@ -246,7 +246,7 @@
                 <button type="button" class="btn btn-default" ms-on-click="resumesSubmit()">保存设置</button>
             </div>
             <div class="col-xs-4">
-                <button type="button" class="btn btn-default">预览简历</button>
+                <button type="button" ms-on-click="previewResume()" class="btn btn-default">预览简历</button>
             </div>
         </div>
     </form>
