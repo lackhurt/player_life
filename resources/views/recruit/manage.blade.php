@@ -30,17 +30,17 @@
                                 </div>
                                 <div class="col-md-12"><b>{% el.tag %}</b></div>
                             </td>
-                            <td class="col-md-8">
+                            <td class="col-md-8" ms-data-recruit_id="el.recruit_id">
                                 <div class="col-md-8">
-                                    {%el.title%}:{%el.recruitId%}
+                                    {%el.title%}
                                 </div>
                                 <div class="col-md-4">
                                     <a class="btn btn-default" role="button" ms-click="edit($index)">修改</a>
-                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruitId)">显示</a>
-                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruitId)">关闭</a>
-                                    <a class="btn btn-default" role="button" ms-click="view(el.recruitId)">预览</a>
+                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruit_id)">显示</a>
+                                    <a class="btn btn-default" role="button" ms-click="toggle(el.recruit_id)">关闭</a>
+                                    <a class="btn btn-default" role="button" ms-click="view(el.recruit_id)">预览</a>
 
-                                    <a class="btn btn-default" role="button"  ms-click="del(el.recruitId,$remove)">删除</a>
+                                    <a class="btn btn-default" role="button"  ms-click="del(el.recruit_id,$remove)">删除</a>
                                     <input type="checkbox"  checked>
                                 </div>
                             </td>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="row">
                         <form id="infoForm">
-                            <input type="hidden" name="recruitId" ms-attr-value=""/>
+                            <input type="hidden" name="recruit_id" ms-attr-value=""/>
 
                             <div class="form-group">
                                 <label>招募标签:</label>
