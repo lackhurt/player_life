@@ -55,6 +55,7 @@ Route::group([
     Route::controllers([
         'create' => 'Corp\CreateController',
         'resumes' => 'Corp\ResumesController',
+        'recruit/list' => 'Corp\RecruitListController'
     ]);
 });
 
