@@ -163,8 +163,7 @@
                                 <div class="form-group">
                                     <div class="col-md-10 col-md-offset-1">
                                         <button type="button" class="btn btn-primary" ms-click="saveClick">保存</button>
-                                        <button type="button" class="btn btn-primary" ms-click="releaseClick">发布
-                                        </button>
+                                        <button type="button" class="btn btn-primary" ms-click="localView">预览</button>
                                     </div>
                                 </div>
                             </div>
