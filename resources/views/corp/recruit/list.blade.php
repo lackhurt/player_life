@@ -20,7 +20,8 @@
             @foreach ($corp['recruit'] as $index => $recruit)
             <tr>
                 <td>
-                    {{$recruit['title']}}
+                    <a href="/corp/recruit/view?cid={{$corp['_id']}}&rid={{$recruit['recruit_id']}}">{{$recruit['title']}}</a>
+
                 </td>
                 <td>
                     {{$recruit['tag']}}
@@ -32,13 +33,18 @@
                     {{$recruit['point_min']}} - {{$recruit['point_max']}}
                 </td>
                 <td>
+
                     {{$recruit['play_time']}}
                 </td>
                 <td>
                     {{$recruit['sex']}}
                 </td>
                 <td>
-                    <button class="js_deliver_resume btn btn-primary" data-game="暗黑破坏神" data-recruit-id="{{$recruit['recruit_id']}}" data-corp-id="{{$corp['_id']}}">投递简历</button>
+                    @if(!empty($recruit['delivered_for_current_user']))
+                        <button class="js_deliver_resume btn btn-primary btn-disabled" disabled>已投递</button>
+                    @else
+                        <button class="js_deliver_resume btn btn-primary" data-game="暗黑破坏神" data-recruit-id="{{$recruit['recruit_id']}}" data-corp-id="{{$corp['_id']}}">投递简历</button>
+                    @endif
                 </td>
             </tr>
             @endforeach

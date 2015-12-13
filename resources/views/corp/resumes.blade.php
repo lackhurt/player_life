@@ -15,7 +15,20 @@
             </thead>
             <tbody>
             @foreach ($resumes as $resume)
+                <tr>
+                    <td>
+                        {{$resume['title']}}
+                    </td>
+                    <td>
 
+                    </td>
+                    <td>
+
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             @endforeach
             </tbody>
         </table>

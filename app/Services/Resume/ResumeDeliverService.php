@@ -2,6 +2,8 @@
 
 namespace App\Services\Resume;
 
+use App\Services\Corp\CorpResumesService;
+
 class ResumeDeliverService
 {
 
@@ -9,31 +11,19 @@ class ResumeDeliverService
 
     public function deliver(Array $resume, $recruitId, $corpId, $userId) {
 
-        return \DB::selectCollection('corps')->update([
-            '_id' => new \MongoId($corpId),
-            'recruit' => [
-                '$elemMatch' => [
-                    'recruit_id' => $recruitId
-                ]
-            ]
-        ], [
-            '$push' => [
-                'recruit.$.resumes' => [
-                    'user_id' => $userId,
-                    'state' => self::DELIVERED,
-                    'delivered_at' => new \MongoDate(),
-                    'resume' => $resume
-                ]
-            ]
-        ], [
-            'w' => 1
-        ]);
+        $resume['corp_id'] = $corpId;
+        $resume['user'] = \MongoDBRef::create('users', new \MongoId($userId));
+        $resume['recruit_id'] = $recruitId;
+        $resume['state'] = CorpResumesService::RESUMES_STATE_RECEIVED;
+
+        return \DB::selectCollection('recruit_resumes')->insert($resume);
     }
 
-    public function isDelivered($corpId, $userId) {
-        return \DB::selectCollection('corps')->find([
-            '_id' => new \MongoId($corpId),
-            'recruit.resumes.user_id' => $userId
+    public function isDelivered($corpId, $recruitId, $userId) {
+        return \DB::selectCollection('recruit_resumes')->find([
+            'corp_id' => $corpId,
+            'recruit_id' => $recruitId,
+            'user_id' => $userId
         ])->hasNext();
     }
 

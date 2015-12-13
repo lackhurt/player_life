@@ -11,7 +11,7 @@ namespace App\Http\Controllers\User;
 
 use App\lib\Rest\Rest;
 use App\lib\Uploader\Uploader;
-use App\Services\User\UserInfo;
+use App\Services\User\UserInfoService;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Guard;
@@ -25,7 +25,7 @@ class InfoController extends Controller
 
 
 
-    public function __construct(UserInfo $userInfo)
+    public function __construct(UserInfoService $userInfo)
     {
         $this->userInfo = $userInfo;
     }

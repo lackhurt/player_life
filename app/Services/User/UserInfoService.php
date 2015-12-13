@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Validator;
 
-class UserInfo {
+class UserInfoService {
 
     public function validatorBase(array $data) {
         $rules = [
@@ -104,7 +104,7 @@ class UserInfo {
     //用户基础信息编辑
     public function updateBase(array $data, $id) {
         $user = User::find($id);
-        $user->update([
+        return $user->update([
             'birthday' => strtotime($data['birthday']),
             'nickname' => $data['nickname'],
             'gender' => $data['gender'],

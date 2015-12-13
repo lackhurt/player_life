@@ -7,6 +7,7 @@ use App\Corp;
 
 class RecruitSearchService
 {
+
     public function search() {
 
         $corpsCursor = \DB::selectCollection('corps')->find([
@@ -26,5 +27,6 @@ class RecruitSearchService
 
         return $corps;
     }
+
 
 }

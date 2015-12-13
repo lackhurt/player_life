@@ -108,7 +108,7 @@ class ResumesController extends Controller {
 
         $userId = Session::get($guard->getName());
 
-        if ($resumeDeliverService->isDelivered($params['corpId'], $userId)) {
+        if ($resumeDeliverService->isDelivered($params['corpId'], $params['recruitId'], $userId)) {
             return Rest::reject('简历已经投递了');
         }
 
