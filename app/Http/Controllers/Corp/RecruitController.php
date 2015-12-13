@@ -75,7 +75,7 @@ class RecruitController extends Controller {
         }
     }
 
-    /*
+    /**
      *
      * 需要添加的限制
      * userid没加呢
