@@ -31,4 +31,9 @@ class TestController extends Controller {
         Uploader::valid($request->all()['upload_token'], $request->all()['test_file']);
         return Uploader::confirm(Uploader::saveTemporary($request->all()['test_file']), 'users');
     }
+
+    public function test()
+    {
+
+    }
 }
